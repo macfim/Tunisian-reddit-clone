@@ -14,7 +14,6 @@ const Header = () => {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
     padding-inline: 0.875rem;
     padding-block: 1.125rem;
-    font-family: "VAG Rounded";
 
     @media only screen and (min-width: 1000px) {
       justify-content: start;
@@ -35,6 +34,7 @@ const Header = () => {
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    font-family: "VAG Rounded";
 
     @media only screen and (min-width: 1000px) {
       justify-content: start;
@@ -75,7 +75,6 @@ const Header = () => {
     justify-content: space-between;
     align-items: center;
     flex: 0 0 auto;
-    font-weight: 300;
 
     @media only screen and (min-width: 1000px) {
       display: flex;
