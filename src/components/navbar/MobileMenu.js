@@ -26,7 +26,7 @@ const MobileMenu = () => {
   `;
 
   return (
-    <HamburgerMenu onClick={toggleMenu}>
+    <HamburgerMenu id="mobile-menu" onClick={toggleMenu}>
       {menuState ? <MenuX /> : <MenuH />}
     </HamburgerMenu>
   );

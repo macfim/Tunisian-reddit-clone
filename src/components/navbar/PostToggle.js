@@ -29,7 +29,7 @@ const PostToggle = () => {
   `;
 
   return (
-    <ToggleMenu onClick={togglePostd}>
+    <ToggleMenu id="post-menu" onClick={togglePostd}>
       <span>post</span>
       <IconWrapper>{postState ? <ChevronDown /> : <ChevronUp />}</IconWrapper>
     </ToggleMenu>

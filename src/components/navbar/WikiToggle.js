@@ -29,7 +29,7 @@ const WikiToggle = () => {
   `;
 
   return (
-    <ToggleMenu onClick={toggleWikid}>
+    <ToggleMenu id="wiki-menu" onClick={toggleWikid}>
       <span>wiki</span>
       <IconWrapper>{wikiState ? <ChevronDown /> : <ChevronUp />}</IconWrapper>
     </ToggleMenu>
