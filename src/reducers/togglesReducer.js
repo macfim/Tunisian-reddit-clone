@@ -10,26 +10,26 @@ const togglesReducer = createSlice({
   name: "toggles",
   initialState,
   reducers: {
-    toggleMobileMenu (state) {
+    toggleMobileMenu(state) {
       state.menu = !state.menu;
     },
-    togglePost (state) {
+    togglePost(state) {
       return {
         ...state,
         post: !state.post,
-        wiki: false
-      }
+        wiki: false,
+      };
     },
-    toggleWiki (state) {
+    toggleWiki(state) {
       return {
         ...state,
         wiki: !state.wiki,
-        post: false
-      }
-    }
+        post: false,
+      };
+    },
   },
 });
 
-
-export const { toggleMobileMenu, togglePost, toggleWiki } = togglesReducer.actions;
+export const { toggleMobileMenu, togglePost, toggleWiki } =
+  togglesReducer.actions;
 export default togglesReducer.reducer;

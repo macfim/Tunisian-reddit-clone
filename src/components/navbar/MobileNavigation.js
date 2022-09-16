@@ -6,16 +6,20 @@ import SearchBar from "./SearchBar";
 import Links from "./Links";
 import NavMenu from "./NavMenu";
 
-const Navigation = () => {
+const MobileNavigation = () => {
   const postState = useSelector((state) => state.toggles.post);
   const wikiState = useSelector((state) => state.toggles.wiki);
   const menuState = useSelector((state) => state.toggles.menu);
 
-  const posts = ['index', 'travel', 'culture', 'food', 'faq'];
-  const wiki = ['hot', 'new', 'top', 'rising'];
+  const wiki = ["index", "travel", "culture", "food", "faq"];
+  const posts = ["hot", "new", "top", "rising"];
 
   const Navigation = styled.div`
     background: white;
+
+    @media only screen and (min-width: 1000px) {
+      display: none;
+    }
   `;
 
   const Menu = styled.div`
@@ -50,4 +54,4 @@ const Navigation = () => {
   );
 };
 
-export default Navigation;
+export default MobileNavigation;
