@@ -19,8 +19,7 @@ const PostToggle = () => {
     user-select: none;
 
     & > span {
-      font-weight: normal;
-      font-family: sans-serif;
+      font-weight: 300;
     }
   `;
 
