@@ -35,7 +35,7 @@ const Header = () => {
     align-items: center;
     width: 100%;
     font-family: "VAG Rounded";
-    
+
     & > * {
       text-decoration: none;
       color: black;
@@ -96,7 +96,7 @@ const Header = () => {
       <Wrapper>
         <LogoWrapper>
           <Link to="/">
-            <Logo>TunisiaReddit</Logo>
+            <Logo>lightreddit</Logo>
           </Link>
           <Flag src="images/logo.webp" />
         </LogoWrapper>

@@ -1,9 +1,22 @@
 import styled from "@emotion/styled";
 
-import { Search } from '../icons';
+import { Search } from "../icons";
+import { searchPost } from "../../reducers/postsReducer";
+import { useDispatch } from "react-redux";
 
 const SearchBar = () => {
-  const SearchWrapper = styled.div`
+  const dispatch = useDispatch();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const search = e.target.search.value;
+
+    dispatch(searchPost(search));
+
+    e.target.search.value = "";
+  };
+
+  const SearchWrapper = styled.form`
     height: 47px;
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-radius: 10px;
@@ -11,17 +24,18 @@ const SearchBar = () => {
 
     display: grid;
     grid-template-columns: 47px 1fr;
-    gap: .1rem;
+    gap: 0.1rem;
   `;
 
-  const SearchLogo = styled.div`
-    
-    padding-inline: .3rem;
+  const SearchLogo = styled.button`
+    padding-inline: 0.3rem;
     cursor: pointer;
     border-radius: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
+    background: white;
+    border: none;
 
     :hover {
       background: rgba(0, 0, 0, 0.05);
@@ -44,11 +58,11 @@ const SearchBar = () => {
   `;
 
   return (
-    <SearchWrapper>
-      <SearchLogo>
+    <SearchWrapper onSubmit={handleSearch}>
+      <SearchLogo type="submit">
         <Search />
       </SearchLogo>
-      <SearchInput placeholder="Search" />
+      <SearchInput name="search" placeholder="Search" />
     </SearchWrapper>
   );
 };

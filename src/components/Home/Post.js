@@ -21,13 +21,9 @@ const Post = ({ post }) => {
 
   useEffect(() => {
     checkContentType();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [checkContentType]);
-
-  useEffect(() => {
     calculatePostAge();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [created_utc]);
+  }, [post]);
 
   function calculatePostAge() {
     const localUnixTimestamp = Math.floor(Date.now() / 1000);
@@ -150,25 +146,27 @@ const Post = ({ post }) => {
   `;
 
   return (
-    <Post>
-      <AuthorName>Posted by {author}</AuthorName>
-      <Title>
-        {link_flair_text && <Flair>{link_flair_text}</Flair>}
-        {title}
-      </Title>
-      {contentType === "text" && <Content>{selftext}</Content>}
-      {contentType === "image" && <img alt="" src={url_overridden_by_dest} />}
-      {contentType === "video" && (
-        <YTVideo src={url_overridden_by_dest}></YTVideo>
-      )}
-      <Footer>
-        <CommentWrapper>
-          <Comments></Comments>
-          <span>{num_comments} comments</span>
-        </CommentWrapper>
-        <PostAge>{`created ${postAge} ago`}</PostAge>
-      </Footer>
-    </Post>
+    <>
+      <Post>
+        <AuthorName>Posted by {author}</AuthorName>
+        <Title>
+          {link_flair_text && <Flair>{link_flair_text}</Flair>}
+          {title}
+        </Title>
+        {contentType === "text" && <Content>{selftext}</Content>}
+        {contentType === "image" && <img alt="" src={url_overridden_by_dest} />}
+        {contentType === "video" && (
+          <YTVideo src={url_overridden_by_dest}></YTVideo>
+        )}
+        <Footer>
+          <CommentWrapper>
+            <Comments></Comments>
+            <span>{num_comments} comments</span>
+          </CommentWrapper>
+          <PostAge>{`created ${postAge} ago`}</PostAge>
+        </Footer>
+      </Post>
+    </>
   );
 };
 

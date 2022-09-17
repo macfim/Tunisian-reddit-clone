@@ -1,16 +1,16 @@
 import styled from "@emotion/styled";
 import { useSelector, useDispatch } from "react-redux";
 
-import { MenuH, MenuX } from '../icons';
+import { MenuH, MenuX } from "../icons";
 import { toggleMobileMenu } from "../../reducers/togglesReducer";
 
 const MobileMenu = () => {
   const dispatch = useDispatch();
-  const menuState = useSelector(state => state.toggles.menu);
+  const menuState = useSelector((state) => state.toggles.menu);
 
   const toggleMenu = () => {
     dispatch(toggleMobileMenu());
-  }
+  };
 
   const HamburgerMenu = styled.div`
     flex: 0 0 49px;

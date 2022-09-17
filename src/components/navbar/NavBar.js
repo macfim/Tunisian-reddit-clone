@@ -1,10 +1,9 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 import Header from "./Header";
 import MobileNavigation from "./MobileNavigation";
 
 const NavBar = () => {
-
   const NavBar = styled.div`
     position: absolute;
     width: 100%;

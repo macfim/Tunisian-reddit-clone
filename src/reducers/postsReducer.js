@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getAll } from "../services/posts";
+import { getAll, search } from "../services/posts";
 
 const initialState = {
   posts: [],
@@ -8,6 +8,8 @@ const initialState = {
   isLoadingNewData: false,
   maxLoadNewData: false,
   error: "",
+  currentDataType: "default",
+  lastSearch: "",
 };
 
 const postsReducer = createSlice({
@@ -24,7 +26,12 @@ const postsReducer = createSlice({
       state.isLoadingNewData = !state.isLoadingNewData;
     },
     clearPosts(state, action) {
-      return initialState;
+      return {
+        ...state,
+        posts: [],
+        lastPost: "",
+        lastSearch: "",
+      };
     },
     setLastPost(state, action) {
       state.lastPost = action.payload;
@@ -35,12 +42,19 @@ const postsReducer = createSlice({
     setMaxLoadNewData(state, action) {
       state.maxLoadNewData = action.payload;
     },
+    setCurrentDataType(state, action) {
+      state.currentDataType = action.payload;
+    },
+    setLastSearch(state, action) {
+      state.lastSearch = action.payload;
+    },
   },
 });
 
 export const fetchAll = (index = "", lastPost = "") => {
   return async (dispatch) => {
     try {
+      dispatch(setCurrentDataType("default"));
       !lastPost && dispatch(clearPosts());
       lastPost && dispatch(toggleLoadingNewData());
       const response = await getAll(index, lastPost);
@@ -61,6 +75,28 @@ export const fetchAll = (index = "", lastPost = "") => {
   };
 };
 
+export const searchPost = (q, type = "load", lastPost) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setCurrentDataType("search"));
+      type === "load" && dispatch(clearPosts());
+      type === "load" && dispatch(setLastSearch(q));
+      type !== "load" && dispatch(toggleLoadingNewData());
+      const response = await search(q, lastPost);
+      const data = response.data.children;
+      dispatch(setLastPost(data[data.length - 1].data.name));
+      type === "load" ? dispatch(setPosts(data)) : dispatch(pushPosts(data));
+      type !== "load" && dispatch(toggleLoadingNewData());
+    } catch (err) {
+      if (err.message === "Network Error") dispatch(setError(err.message));
+      if (
+        err.message === "Cannot read properties of undefined (reading 'data')"
+      )
+        dispatch(setMaxLoadNewData(true));
+    }
+  };
+};
+
 export const {
   setPosts,
   clearPosts,
@@ -69,5 +105,7 @@ export const {
   toggleLoadingNewData,
   setMaxLoadNewData,
   setError,
+  setCurrentDataType,
+  setLastSearch,
 } = postsReducer.actions;
 export default postsReducer.reducer;

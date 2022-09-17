@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 
 import Post from "./Post";
 import SkeletonMobileLoading from "./SkeletonMobileLoading";
-import { fetchAll } from "../../reducers/postsReducer";
+import { fetchAll, searchPost } from "../../reducers/postsReducer";
 import { toggleMobileMenu } from "../../reducers/togglesReducer";
 
 const PostList = ({ post }) => {
@@ -16,17 +16,25 @@ const PostList = ({ post }) => {
 
   const [reFetchCount, setReFetchCount] = useState(0);
 
-  const { posts, lastPost, isLoadingNewData, error, maxLoadNewData } =
-    useSelector((state) => state.posts);
-    
+  const {
+    posts,
+    lastPost,
+    isLoadingNewData,
+    error,
+    maxLoadNewData,
+    currentDataType,
+    lastSearch,
+  } = useSelector((state) => state.posts);
+
   useEffect(() => {
     dispatch(fetchAll(post));
-    menuState && dispatch(toggleMobileMenu());
+    if (menuState) dispatch(toggleMobileMenu());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, reFetchCount]);
-  
-  const handleLoadMore = () => {
-    dispatch(fetchAll(post, lastPost));
+
+  const handleLoadMore = () => {console.log(currentDataType)
+    if (currentDataType === "default") dispatch(fetchAll(post, lastPost));
+    else dispatch(searchPost(lastSearch, "welp", lastPost));
   };
 
   const LoadMore = styled.div`

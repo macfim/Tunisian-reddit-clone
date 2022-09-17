@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  menu: true,
+  menu: false,
   post: true,
   wiki: false,
 };
@@ -11,7 +11,10 @@ const togglesReducer = createSlice({
   initialState,
   reducers: {
     toggleMobileMenu(state) {
-      state.menu = !state.menu;
+      return {
+        ...state,
+        menu: !state.menu
+      }
     },
     togglePost(state) {
       return {
