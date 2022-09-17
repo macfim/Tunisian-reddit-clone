@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import ReactPlayer from "react-player";
 import { useState, useEffect } from "react";
 
 import { Comments, ChevronDown } from "../icons";
