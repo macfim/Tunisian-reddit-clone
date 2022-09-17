@@ -1,12 +1,12 @@
 import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import SearchBar from "./SearchBar";
 import WikiToggle from "./WikiToggle";
-import WikiMenu from './WikiMenu';
+import WikiMenu from "./WikiMenu";
 
 const Header = () => {
-
   const wikiState = useSelector((state) => state.toggles.wiki);
 
   const Header = styled.div`
@@ -35,6 +35,11 @@ const Header = () => {
     align-items: center;
     width: 100%;
     font-family: "VAG Rounded";
+    
+    & > * {
+      text-decoration: none;
+      color: black;
+    }
 
     @media only screen and (min-width: 1000px) {
       justify-content: start;
@@ -90,16 +95,16 @@ const Header = () => {
     <Header>
       <Wrapper>
         <LogoWrapper>
-          <Logo>TunisiaReddit</Logo>
+          <Link to="/">
+            <Logo>TunisiaReddit</Logo>
+          </Link>
           <Flag src="images/logo.webp" />
         </LogoWrapper>
         <LSearchWrapper>
           <SearchBar />
         </LSearchWrapper>
         <LMenu>
-          <PostLink>
-            post
-          </PostLink>
+          <PostLink>post</PostLink>
           <WikiToggle />
           {wikiState && <WikiMenu />}
         </LMenu>

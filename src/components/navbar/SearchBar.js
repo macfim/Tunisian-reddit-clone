@@ -11,15 +11,17 @@ const SearchBar = () => {
 
     display: grid;
     grid-template-columns: 47px 1fr;
-    align-items: center;
+    gap: .1rem;
   `;
 
   const SearchLogo = styled.div`
-    width: 34px;
-    height: 34px;
-    margin-inline: 5px;
+    
+    padding-inline: .3rem;
     cursor: pointer;
-    border-radius: 15px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     :hover {
       background: rgba(0, 0, 0, 0.05);

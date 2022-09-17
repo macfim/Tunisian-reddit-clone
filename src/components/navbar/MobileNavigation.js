@@ -4,15 +4,13 @@ import { useSelector } from "react-redux";
 import MobileMenu from "./MobileMenu";
 import SearchBar from "./SearchBar";
 import Links from "./Links";
-import NavMenu from "./NavMenu";
+import PostMenu from "./PostMenu";
+import WikiMenu from "./WikiMenu";
 
 const MobileNavigation = () => {
   const postState = useSelector((state) => state.toggles.post);
   const wikiState = useSelector((state) => state.toggles.wiki);
   const menuState = useSelector((state) => state.toggles.menu);
-
-  const wiki = ["index", "travel", "culture", "food", "faq"];
-  const posts = ["hot", "new", "top", "rising"];
 
   const Navigation = styled.div`
     background: white;
@@ -48,8 +46,8 @@ const MobileNavigation = () => {
           <Links />
         </MenuLinks>
       )}
-      {postState && menuState && <NavMenu content={posts} />}
-      {wikiState && menuState && <NavMenu content={wiki} />}
+      {postState && menuState && <PostMenu />}
+      {wikiState && menuState && <WikiMenu />}
     </Navigation>
   );
 };
