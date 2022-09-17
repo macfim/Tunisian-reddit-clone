@@ -12,19 +12,19 @@ import { toggleMobileMenu } from "../../reducers/togglesReducer";
 const PostList = ({ post }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const menuState = useSelector(state => state.toggles.menu);
+  const menuState = useSelector((state) => state.toggles.menu);
 
   const [reFetchCount, setReFetchCount] = useState(0);
 
-  const { posts, lastPost, isLoadingNewData, error, maxLoadNewData } = useSelector(
-    (state) => state.posts
-  );
-
+  const { posts, lastPost, isLoadingNewData, error, maxLoadNewData } =
+    useSelector((state) => state.posts);
+    
   useEffect(() => {
     dispatch(fetchAll(post));
     menuState && dispatch(toggleMobileMenu());
-  }, [location,reFetchCount]);
-
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [location, reFetchCount]);
+  
   const handleLoadMore = () => {
     dispatch(fetchAll(post, lastPost));
   };
@@ -82,13 +82,16 @@ const PostList = ({ post }) => {
     margin-bottom: 1rem;
   `;
 
-  if (error) return (
-    <ErrorPage>
-      <Error>{error}</Error>
-      <Button onClick={() => setReFetchCount(reFetchCount+1)}>Try Again</Button>
-      {reFetchCount}
-    </ErrorPage>
-  );
+  if (error)
+    return (
+      <ErrorPage>
+        <Error>{error}</Error>
+        <Button onClick={() => setReFetchCount(reFetchCount + 1)}>
+          Try Again
+        </Button>
+        {reFetchCount}
+      </ErrorPage>
+    );
 
   if (posts.length === 0) return <SkeletonMobileLoading />;
 
@@ -97,13 +100,15 @@ const PostList = ({ post }) => {
       {posts.map((post, i) => (
         <Post key={i} post={post.data} />
       ))}
-      {!maxLoadNewData && <LoadMore>
-        {isLoadingNewData ? (
-          <Spinner></Spinner>
-        ) : (
-          <Button onClick={handleLoadMore}>LoadMore</Button>
-        )}
-      </LoadMore>}
+      {!maxLoadNewData && (
+        <LoadMore>
+          {isLoadingNewData ? (
+            <Spinner></Spinner>
+          ) : (
+            <Button onClick={handleLoadMore}>LoadMore</Button>
+          )}
+        </LoadMore>
+      )}
     </>
   );
 };

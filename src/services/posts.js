@@ -7,4 +7,4 @@ const getAll = async (index, lastPost) => {
   return response.data;
 };
 
-export default { getAll };
+export { getAll };

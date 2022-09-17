@@ -41,17 +41,6 @@ const WikiMenu = () => {
     }
   `;
 
-  const Item = styled.div`
-    cursor: pointer;
-    width: 100%;
-    padding-inline: 1rem;
-
-    :hover {
-      background: rgba(0, 0, 0, 0.05);
-      transition: background ease-in-out 200ms;
-    }
-  `;
-
   return (
     <Menu>
       <Link to="/wiki/index">index</Link>

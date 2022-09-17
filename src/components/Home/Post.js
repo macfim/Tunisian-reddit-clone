@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 
-import { Comments, ChevronDown } from "../icons";
+import { Comments } from "../icons";
 
 const Post = ({ post }) => {
   const [contentType, setContentType] = useState(null);
@@ -15,17 +15,18 @@ const Post = ({ post }) => {
     link_flair_text_color,
     selftext,
     url_overridden_by_dest,
-    url,
     created_utc,
-    num_comments
+    num_comments,
   } = post;
 
   useEffect(() => {
     checkContentType();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkContentType]);
 
   useEffect(() => {
     calculatePostAge();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [created_utc]);
 
   function calculatePostAge() {
@@ -51,6 +52,7 @@ const Post = ({ post }) => {
     setPostAge(age);
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   function checkContentType() {
     if (url_overridden_by_dest) {
       if (url_overridden_by_dest.includes("youtu")) setContentType("video");
@@ -120,7 +122,7 @@ const Post = ({ post }) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-top: .5rem;
+    margin-top: 0.5rem;
   `;
 
   const CommentWrapper = styled.div`
@@ -138,7 +140,7 @@ const Post = ({ post }) => {
     & > span {
       font-size: 0.6rem;
       color: black;
-      margin-left: .3rem;
+      margin-left: 0.3rem;
     }
   `;
 
@@ -155,7 +157,7 @@ const Post = ({ post }) => {
         {title}
       </Title>
       {contentType === "text" && <Content>{selftext}</Content>}
-      {contentType === "image" && <img src={url_overridden_by_dest} />}
+      {contentType === "image" && <img alt="" src={url_overridden_by_dest} />}
       {contentType === "video" && (
         <YTVideo src={url_overridden_by_dest}></YTVideo>
       )}

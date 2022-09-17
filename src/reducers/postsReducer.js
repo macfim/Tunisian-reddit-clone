@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import postsService from "../services/posts";
+import { getAll } from "../services/posts";
 
 const initialState = {
   posts: [],
@@ -34,7 +34,7 @@ const postsReducer = createSlice({
     },
     setMaxLoadNewData(state, action) {
       state.maxLoadNewData = action.payload;
-    }
+    },
   },
 });
 
@@ -43,7 +43,7 @@ export const fetchAll = (index = "", lastPost = "") => {
     try {
       !lastPost && dispatch(clearPosts());
       lastPost && dispatch(toggleLoadingNewData());
-      const response = await postsService.getAll(index, lastPost);
+      const response = await getAll(index, lastPost);
       const data = response.data.children;
       if (data.length === 0) {
         dispatch(toggleLoadingNewData());
