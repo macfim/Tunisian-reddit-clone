@@ -145,6 +145,11 @@ const Post = ({ post }) => {
     color: black;
   `;
 
+  const Img = styled.img`
+    width: 100%;
+    height: auto;
+  `;
+
   return (
     <>
       <Post>
@@ -154,7 +159,7 @@ const Post = ({ post }) => {
           {title}
         </Title>
         {contentType === "text" && <Content>{selftext}</Content>}
-        {contentType === "image" && <img alt="" src={url_overridden_by_dest} />}
+        {contentType === "image" && <Img alt="" src={url_overridden_by_dest} />}
         {contentType === "video" && (
           <YTVideo src={url_overridden_by_dest}></YTVideo>
         )}
