@@ -85,7 +85,7 @@ export const searchPost = (q, type = "load", lastPost) => {
       type !== "load" && dispatch(toggleLoadingNewData());
       const response = await search(q, lastPost);
       const data = response.data.children;
-      if (data.length == 0) {
+      if (data.length === 0) {
         dispatch(setError('not found'))
       }
       dispatch(setLastPost(data[data.length - 1].data.name));
