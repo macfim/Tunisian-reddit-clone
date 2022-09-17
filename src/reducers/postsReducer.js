@@ -60,7 +60,8 @@ export const fetchAll = (index = "", lastPost = "") => {
       const response = await getAll(index, lastPost);
       const data = response.data.children;
       if (data.length === 0) {
-        dispatch(toggleLoadingNewData());
+        console.log('not found');
+        throw new Error("not found");
       }
       dispatch(setLastPost(data[data.length - 1].data.name));
       !lastPost ? dispatch(setPosts(data)) : dispatch(pushPosts(data));
@@ -84,6 +85,9 @@ export const searchPost = (q, type = "load", lastPost) => {
       type !== "load" && dispatch(toggleLoadingNewData());
       const response = await search(q, lastPost);
       const data = response.data.children;
+      if (data.length == 0) {
+        dispatch(setError('not found'))
+      }
       dispatch(setLastPost(data[data.length - 1].data.name));
       type === "load" ? dispatch(setPosts(data)) : dispatch(pushPosts(data));
       type !== "load" && dispatch(toggleLoadingNewData());
