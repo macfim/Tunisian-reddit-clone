@@ -3,9 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-import Post from "./Post";
+import List from './List';
 import Repos from "./Repos";
-import SkeletonLoading from "./SkeletonLoading";
 import {
   fetchAll,
   searchPost,
@@ -16,14 +15,11 @@ import { toggleMobileMenu } from "../../reducers/togglesReducer";
 const PostList = ({ post }) => {
   const dispatch = useDispatch();
   const location = useLocation();
-  const menuState = useSelector((state) => state.toggles.menu);
-
   const [reFetchCount, setReFetchCount] = useState(0);
 
   const {
     posts,
     lastPost,
-    isLoadingNewData,
     error,
     maxLoadNewData,
     currentDataType,
@@ -33,12 +29,11 @@ const PostList = ({ post }) => {
 
   useEffect(() => {
     dispatch(fetchAll(post));
-    if (menuState) dispatch(toggleMobileMenu());
+    dispatch(toggleMobileMenu(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location, reFetchCount]);
+  }, [location]);
 
   const handleLoadMore = () => {
-    console.log(currentDataType);
     if (currentDataType === "default") dispatch(fetchAll(post, lastPost));
     else if (currentDataType === "repo")
       dispatch(searchRepoPosts(lastRepo, "reload", lastPost));
@@ -88,14 +83,6 @@ const PostList = ({ post }) => {
     }
   `;
 
-  const List = styled.div`
-    width: 100%;
-
-    @media only screen and (min-width: 1000px) {
-      max-width: 43rem;
-    }
-  `;
-
   const Info = styled.div`
     display: none;
     margin-left: 1rem;
@@ -119,17 +106,7 @@ const PostList = ({ post }) => {
   return (
     <>
       <Main>
-        <List>
-          {posts.length !== 0 ? (
-            <>
-              {posts.map((post, i) => (
-                <Post key={i} post={post.data} />
-              ))}
-            </>
-          ) : (
-            <SkeletonLoading />
-          )}
-        </List>
+        <List posts={posts}/>
         <Info>
           <Repos />
         </Info>
@@ -137,7 +114,7 @@ const PostList = ({ post }) => {
       {!maxLoadNewData && (
         <LoadMore>
           <Button onClick={handleLoadMore}>
-            {!isLoadingNewData ? "LoadMore" : "Loading"}
+            LoadMore
           </Button>
         </LoadMore>
       )}

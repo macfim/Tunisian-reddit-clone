@@ -14,13 +14,13 @@ const root = ReactDOM.createRoot(container);
 
 root.render(
   <>
-    <React.StrictMode>
+    {/* <React.StrictMode> */}
       <Provider store={store}>
         <Router>
           <ScrollToTop />
           <App />
         </Router>
       </Provider>
-    </React.StrictMode>
+    {/* </React.StrictMode> */}
   </>
 );

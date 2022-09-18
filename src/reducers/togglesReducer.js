@@ -10,11 +10,9 @@ const togglesReducer = createSlice({
   name: "toggles",
   initialState,
   reducers: {
-    toggleMobileMenu(state) {
-      return {
-        ...state,
-        menu: !state.menu
-      }
+    toggleMobileMenu(state, action) {
+      if (action.payload === false) state.menu = false;
+      else state.menu = !state.menu;
     },
     togglePost(state) {
       return {
