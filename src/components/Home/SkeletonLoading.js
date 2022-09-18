@@ -1,6 +1,6 @@
 import SkeletonPost from "./SkeletonPost";
 
-const SkeletonMobileLoading = () => {
+const SkeletonLoading = () => {
   return (
     <>
       <SkeletonPost />
@@ -9,4 +9,4 @@ const SkeletonMobileLoading = () => {
   );
 };
 
-export default SkeletonMobileLoading;
+export default SkeletonLoading;
