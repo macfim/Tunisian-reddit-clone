@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 
 import { Comments } from "../icons";
+import { checkUrlContentType } from "../../utils/postRelated";
 
 const Post = ({ post }) => {
   const [contentType, setContentType] = useState(null);
@@ -25,6 +26,18 @@ const Post = ({ post }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
+  function checkContentType() {
+    try{
+      if (selftext) setContentType("text");
+    else {
+      const type = checkUrlContentType(url_overridden_by_dest);
+      setContentType(type);
+    }
+    } catch(err) {
+      console.log(err.message)
+    }
+  }
+
   function calculatePostAge() {
     const localUnixTimestamp = Math.floor(Date.now() / 1000);
     const newTimestamp = localUnixTimestamp - created_utc;
@@ -46,14 +59,6 @@ const Post = ({ post }) => {
     }
 
     setPostAge(age);
-  }
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  function checkContentType() {
-    if (url_overridden_by_dest) {
-      if (url_overridden_by_dest.includes("youtu")) setContentType("video");
-      else setContentType("image");
-    } else if (selftext) setContentType("text");
   }
 
   const Post = styled.div`
