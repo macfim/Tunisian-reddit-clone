@@ -11,7 +11,7 @@ const SearchBar = () => {
     e.preventDefault();
     const search = e.target.search.value;
 
-    dispatch(searchPost(search));
+    search && dispatch(searchPost(search));
 
     e.target.search.value = "";
   };
