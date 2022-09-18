@@ -16,4 +16,9 @@ const search = async (search, lastPost) => {
   return response.data;
 };
 
-export { getAll, search };
+const searchRepo = async (index, lastPost) => {
+  const response = await axios.get(`${baseUrl}/r/${index}?limit=10&after=${lastPost}`);
+  return response.data;
+};
+
+export { getAll, search, searchRepo };

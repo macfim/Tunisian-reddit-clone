@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { getAll, search } from "../services/posts";
+import { getAll, search, searchRepo } from "../services/posts";
 
 const initialState = {
   posts: [],
@@ -10,6 +10,7 @@ const initialState = {
   error: "",
   currentDataType: "default",
   lastSearch: "",
+  lastRepo: ""
 };
 
 const postsReducer = createSlice({
@@ -31,6 +32,7 @@ const postsReducer = createSlice({
         posts: [],
         lastPost: "",
         lastSearch: "",
+        lastRepo: ""
       };
     },
     setLastPost(state, action) {
@@ -48,6 +50,9 @@ const postsReducer = createSlice({
     setLastSearch(state, action) {
       state.lastSearch = action.payload;
     },
+    setLastRepo(state,action) {
+      state.lastRepo = action.payload;
+    }
   },
 });
 
@@ -60,8 +65,7 @@ export const fetchAll = (index = "", lastPost = "") => {
       const response = await getAll(index, lastPost);
       const data = response.data.children;
       if (data.length === 0) {
-        console.log('not found');
-        throw new Error("not found");
+        dispatch(setError("not found"));
       }
       dispatch(setLastPost(data[data.length - 1].data.name));
       !lastPost ? dispatch(setPosts(data)) : dispatch(pushPosts(data));
@@ -86,7 +90,7 @@ export const searchPost = (q, type = "load", lastPost) => {
       const response = await search(q, lastPost);
       const data = response.data.children;
       if (data.length === 0) {
-        dispatch(setError('not found'))
+        dispatch(setError("not found"));
       }
       dispatch(setLastPost(data[data.length - 1].data.name));
       type === "load" ? dispatch(setPosts(data)) : dispatch(pushPosts(data));
@@ -101,6 +105,32 @@ export const searchPost = (q, type = "load", lastPost) => {
   };
 };
 
+export const searchRepoPosts = (q, type = "load", lastPost) => {
+  return async (dispatch) => {
+    try {
+      dispatch(setCurrentDataType("repo"));
+      type === "load" && dispatch(clearPosts());
+      type === "load" && dispatch(setLastRepo(q));
+      type !== "load" && dispatch(toggleLoadingNewData());
+      const response = await searchRepo(q, lastPost);
+      const data = response.data.children;
+      if (data.length === 0) {
+        dispatch(setError("not found"));
+      }
+      dispatch(setLastPost(data[data.length - 1].data.name));
+      type === "load" ? dispatch(setPosts(data)) : dispatch(pushPosts(data));
+      type !== "load" && dispatch(toggleLoadingNewData());
+    } catch (err) {
+      if (err.message === "Network Error") dispatch(setError(err.message));
+      if (
+        err.message === "Cannot read properties of undefined (reading 'data')"
+      )
+        dispatch(setMaxLoadNewData(true));
+      else dispatch(toggleLoadingNewData());
+    }
+  };
+};
+
 export const {
   setPosts,
   clearPosts,
@@ -111,5 +141,6 @@ export const {
   setError,
   setCurrentDataType,
   setLastSearch,
+  setLastRepo
 } = postsReducer.actions;
 export default postsReducer.reducer;

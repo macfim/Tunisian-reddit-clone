@@ -5,8 +5,9 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 import Post from "./Post";
+import Repos from "./Repos";
 import SkeletonMobileLoading from "./SkeletonMobileLoading";
-import { fetchAll, searchPost } from "../../reducers/postsReducer";
+import { fetchAll, searchPost, searchRepoPosts } from "../../reducers/postsReducer";
 import { toggleMobileMenu } from "../../reducers/togglesReducer";
 
 const PostList = ({ post }) => {
@@ -24,6 +25,7 @@ const PostList = ({ post }) => {
     maxLoadNewData,
     currentDataType,
     lastSearch,
+    lastRepo
   } = useSelector((state) => state.posts);
 
   useEffect(() => {
@@ -32,9 +34,12 @@ const PostList = ({ post }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location, reFetchCount]);
 
-  const handleLoadMore = () => {console.log(currentDataType)
+  const handleLoadMore = () => {
+    console.log(currentDataType);
     if (currentDataType === "default") dispatch(fetchAll(post, lastPost));
-    else dispatch(searchPost(lastSearch, "welp", lastPost));
+    else if (currentDataType === "repo")
+      dispatch(searchRepoPosts(lastRepo, "reload", lastPost));
+    else dispatch(searchPost(lastSearch, "reload", lastPost));
   };
 
   const LoadMore = styled.div`
@@ -90,6 +95,29 @@ const PostList = ({ post }) => {
     margin-bottom: 1rem;
   `;
 
+  const Main = styled.div`
+    display: flex;
+
+    @media only screen and (min-width: 1000px) {
+      justify-content: space-around;
+    }
+  `;
+
+  const List = styled.div`
+    @media only screen and (min-width: 1000px) {
+      max-width: 43rem;
+    }
+  `;
+
+  const Info = styled.div`
+    display: none;
+    margin-left: 1rem;
+
+    @media only screen and (min-width: 1000px) {
+      display: block;
+    }
+  `;
+
   if (error)
     return (
       <ErrorPage>
@@ -105,9 +133,16 @@ const PostList = ({ post }) => {
 
   return (
     <>
-      {posts.map((post, i) => (
-        <Post key={i} post={post.data} />
-      ))}
+      <Main>
+        <List>
+          {posts.map((post, i) => (
+            <Post key={i} post={post.data} />
+          ))}
+        </List>
+        <Info>
+          <Repos />
+        </Info>
+      </Main>
       {!maxLoadNewData && (
         <LoadMore>
           {isLoadingNewData ? (
