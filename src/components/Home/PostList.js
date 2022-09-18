@@ -162,7 +162,7 @@ const PostList = ({ post }) => {
       {!maxLoadNewData && (
         <LoadMore>
           <Button onClick={handleLoadMore}>
-            {isLoadingNewData ? "LoadMore" : "Loading"}
+            {!isLoadingNewData ? "LoadMore" : "Loading"}
           </Button>
         </LoadMore>
       )}
