@@ -116,25 +116,19 @@ const PostList = ({ post }) => {
       </ErrorPage>
     );
 
-  if (posts.length === 0)
-    return (
-      <Main>
-        <List>
-          <SkeletonLoading />
-        </List>
-        <Info>
-          <Repos />
-        </Info>
-      </Main>
-    );
-
   return (
     <>
       <Main>
         <List>
-          {posts.map((post, i) => (
-            <Post key={i} post={post.data} />
-          ))}
+          {posts.length !== 0 ? (
+            <>
+              {posts.map((post, i) => (
+                <Post key={i} post={post.data} />
+              ))}
+            </>
+          ) : (
+            <SkeletonLoading />
+          )}
         </List>
         <Info>
           <Repos />
