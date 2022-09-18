@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { keyframes } from "@emotion/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -65,24 +64,6 @@ const PostList = ({ post }) => {
     :hover {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
-  `;
-
-  const spine = keyframes`
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
-  `;
-
-  const Spinner = styled.div`
-    width: 50px;
-    height: 50px;
-    border: 10px solid #f3f3f3; /* Light grey */
-    border-top: 10px solid #383636; /* Black */
-    border-radius: 50%;
-    animation: ${spine} 1.5s linear infinite;
   `;
 
   const ErrorPage = styled.div`
