@@ -34,7 +34,7 @@ const Header = () => {
     justify-content: space-between;
     align-items: center;
     width: 100%;
-    font-family: "VAG Rounded";
+    font-family: "VAG Rounded", sans-serif;
 
     & > * {
       text-decoration: none;
