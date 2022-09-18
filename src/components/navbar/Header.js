@@ -98,7 +98,7 @@ const Header = () => {
           <Link to="/">
             <Logo>lightreddit</Logo>
           </Link>
-          <Flag src="images/logo.webp" />
+          <Flag src="images/logo.webp" alt="logoImg" />
         </LogoWrapper>
         <LSearchWrapper>
           <SearchBar />
