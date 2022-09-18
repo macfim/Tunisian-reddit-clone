@@ -36,6 +36,12 @@ const SearchBar = () => {
     align-items: center;
     background: white;
     border: none;
+    background: none;
+
+    & > svg {
+      position: relative;
+      z-index: 9999;
+    }
 
     :hover {
       background: rgba(0, 0, 0, 0.05);
