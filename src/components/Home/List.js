@@ -2,8 +2,7 @@ import styled from "@emotion/styled";
 import Post from "./Post";
 import SkeletonLoading from "./SkeletonLoading";
 
-const List = ({posts}) => {
-
+const List = ({ posts }) => {
   const List = styled.div`
     width: 100%;
 
@@ -11,7 +10,7 @@ const List = ({posts}) => {
       max-width: 43rem;
     }
   `;
-  console.log('re')
+
   return (
     <List>
       {posts.length !== 0 ? (

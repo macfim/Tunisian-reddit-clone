@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
+import { LazyLoadImage } from "react-lazy-load-image-component";
 
 import { Comments } from "../icons";
 import { checkUrlContentType } from "../../utils/postRelated";
@@ -152,14 +153,10 @@ const Post = ({ post }) => {
     color: black;
   `;
 
-  const Img = styled.img`
-    width: 100%;
-    height: auto;
-  `;
-
   const Emoji = styled.img`
     width: 1.1rem;
-    margin-inline: .2rem;
+    height: 1.1rem;
+    margin-inline: 0.2rem;
   `;
 
   return (
@@ -180,7 +177,14 @@ const Post = ({ post }) => {
           {title}
         </Title>
         {contentType === "text" && <Content>{selftext}</Content>}
-        {contentType === "image" && <Img alt="" src={url_overridden_by_dest} />}
+        {contentType === "image" && (
+          <LazyLoadImage
+            alt="img"
+            src={url_overridden_by_dest}
+            width="100%"
+            height="auto"
+          />
+        )}
         {contentType === "video" && (
           <YTVideo src={url_overridden_by_dest}></YTVideo>
         )}
