@@ -11,13 +11,13 @@ const Post = ({ post }) => {
   const {
     title,
     author,
-    link_flair_text,
     link_flair_background_color,
     link_flair_text_color,
     selftext,
     url_overridden_by_dest,
     created_utc,
     num_comments,
+    link_flair_richtext,
   } = post;
 
   useEffect(() => {
@@ -27,14 +27,14 @@ const Post = ({ post }) => {
   }, [post]);
 
   function checkContentType() {
-    try{
+    try {
       if (selftext) setContentType("text");
-    else {
-      const type = checkUrlContentType(url_overridden_by_dest);
-      setContentType(type);
-    }
-    } catch(err) {
-      console.log(err.message)
+      else {
+        const type = checkUrlContentType(url_overridden_by_dest);
+        setContentType(type);
+      }
+    } catch (err) {
+      console.log(err.message);
     }
   }
 
@@ -87,7 +87,8 @@ const Post = ({ post }) => {
   `;
 
   const Flair = styled.div`
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
     font-size: 0.7rem;
     color: ${link_flair_text_color};
     padding-inline: 0.5rem;
@@ -156,12 +157,26 @@ const Post = ({ post }) => {
     height: auto;
   `;
 
+  const Emoji = styled.img`
+    width: 1.1rem;
+    margin-inline: .2rem;
+  `;
+
   return (
     <>
       <Post>
         <AuthorName>Posted by {author}</AuthorName>
         <Title>
-          {link_flair_text && <Flair>{link_flair_text}</Flair>}
+          {link_flair_richtext.length !== 0 && (
+            <Flair>
+              {link_flair_richtext.map((item, i) => (
+                <span key={i}>
+                  {item.e === "text" && item.t}
+                  {item.e === "emoji" && <Emoji alt={item.a} src={item.u} />}
+                </span>
+              ))}
+            </Flair>
+          )}
           {title}
         </Title>
         {contentType === "text" && <Content>{selftext}</Content>}
