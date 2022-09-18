@@ -62,6 +62,7 @@ const Post = ({ post }) => {
     margin-bottom: 1.375rem;
     padding-block: 1rem;
     padding-inline: 1rem;
+    overflow: hidden;
 
     display: flex;
     flex-direction: column;

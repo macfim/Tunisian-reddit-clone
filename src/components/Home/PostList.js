@@ -6,8 +6,12 @@ import { useEffect, useState } from "react";
 
 import Post from "./Post";
 import Repos from "./Repos";
-import SkeletonMobileLoading from "./SkeletonMobileLoading";
-import { fetchAll, searchPost, searchRepoPosts } from "../../reducers/postsReducer";
+import SkeletonLoading from "./SkeletonLoading";
+import {
+  fetchAll,
+  searchPost,
+  searchRepoPosts,
+} from "../../reducers/postsReducer";
 import { toggleMobileMenu } from "../../reducers/togglesReducer";
 
 const PostList = ({ post }) => {
@@ -25,7 +29,7 @@ const PostList = ({ post }) => {
     maxLoadNewData,
     currentDataType,
     lastSearch,
-    lastRepo
+    lastRepo,
   } = useSelector((state) => state.posts);
 
   useEffect(() => {
@@ -104,6 +108,8 @@ const PostList = ({ post }) => {
   `;
 
   const List = styled.div`
+    width: 100%;
+
     @media only screen and (min-width: 1000px) {
       max-width: 43rem;
     }
@@ -129,7 +135,17 @@ const PostList = ({ post }) => {
       </ErrorPage>
     );
 
-  if (posts.length === 0) return <SkeletonMobileLoading />;
+  if (posts.length === 0)
+    return (
+      <Main>
+        <List>
+          <SkeletonLoading />
+        </List>
+        <Info>
+          <Repos />
+        </Info>
+      </Main>
+    );
 
   return (
     <>
@@ -145,11 +161,9 @@ const PostList = ({ post }) => {
       </Main>
       {!maxLoadNewData && (
         <LoadMore>
-          {isLoadingNewData ? (
-            <Spinner></Spinner>
-          ) : (
-            <Button onClick={handleLoadMore}>LoadMore</Button>
-          )}
+          <Button onClick={handleLoadMore}>
+            {isLoadingNewData ? "LoadMore" : "Loading"}
+          </Button>
         </LoadMore>
       )}
     </>
