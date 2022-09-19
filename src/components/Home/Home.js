@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Routes, Route } from "react-router-dom";
 
-import PostList from "./PostList";
+import PostsPage from "./PostsPage";
 
 const Home = () => {
 
@@ -22,11 +22,11 @@ const Home = () => {
     <Home>
       <Wrapper>
         <Routes>
-          <Route index element={<PostList />} />
-          <Route path="/hot" element={<PostList post="hot" />} />
-          <Route path="/new" element={<PostList post="new" />} />
-          <Route path="/top" element={<PostList post="top" />} />
-          <Route path="/rising" element={<PostList post="rising" />} />
+          <Route index element={<PostsPage />} />
+          <Route path="/hot" element={<PostsPage categorie="hot" />} />
+          <Route path="/new" element={<PostsPage categorie="new" />} />
+          <Route path="/top" element={<PostsPage categorie="top" />} />
+          <Route path="/rising" element={<PostsPage categorie="rising" />} />
           <Route path="/index" />
           <Route path="/travel" />
           <Route path="/culture" />

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ChevronDown, ChevronUp } from "../icons";
-import { toggleWiki } from "../../reducers/togglesReducer";
+import { toggleWiki } from "../../Slices/togglesSlice";
 
 const WikiToggle = () => {
   const dispatch = useDispatch();

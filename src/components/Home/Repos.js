@@ -3,7 +3,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { ChevronDown, ChevronUp } from "../icons";
-import { searchRepoPosts } from "../../reducers/postsReducer";
+
+import { getRepoPosts } from "../../Slices/postsSlice";
 
 const DropDown = (props) => {
   const { title, content } = props;
@@ -16,7 +17,7 @@ const DropDown = (props) => {
   };
 
   const handleClick = (item) => {
-    dispatch(searchRepoPosts(item));
+    dispatch(getRepoPosts(item));
   };
 
   const DropDown = styled.div``;

@@ -1,12 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import togglesReducer from "./reducers/togglesReducer";
-import postsReducer from "./reducers/postsReducer";
+import togglesSlice from "./Slices/togglesSlice";
+import postsSlice from "./Slices/postsSlice";
 
 const store = configureStore({
   reducer: {
-    toggles: togglesReducer,
-    posts: postsReducer,
+    toggles: togglesSlice,
+    posts: postsSlice,
   },
 });
 

@@ -1,8 +1,9 @@
 import styled from "@emotion/styled";
 
 import { Search } from "../icons";
-import { searchPost } from "../../reducers/postsReducer";
 import { useDispatch } from "react-redux";
+
+import { searchPosts } from "../../Slices/postsSlice";
 
 const SearchBar = () => {
   const dispatch = useDispatch();
@@ -11,7 +12,7 @@ const SearchBar = () => {
     e.preventDefault();
     const search = e.target.search.value;
 
-    search && dispatch(searchPost(search));
+    search && dispatch(searchPosts(search));
 
     e.target.search.value = "";
   };

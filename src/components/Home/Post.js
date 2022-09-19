@@ -63,7 +63,7 @@ const Post = ({ post }) => {
     setPostAge(age);
   }
 
-  const Post = styled.div`
+  const Post = styled.li`
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
     margin-bottom: 1.375rem;
