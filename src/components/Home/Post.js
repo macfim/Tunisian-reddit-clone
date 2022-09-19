@@ -185,6 +185,7 @@ const Post = ({ post }) => {
             width="100%"
             height="auto"
             placeholderSrc={thumbnail}
+            style={{minHeight: '10rem'}}
           />
         )}
         {contentType === "video" && (
