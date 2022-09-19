@@ -20,7 +20,7 @@ const PostsPage = ({ categorie }) => {
 
   useEffect(() => {
     dispatch(getPosts(categorie));
-  }, [dispatch, location]);
+  }, [dispatch, location, categorie]);
 
   const Main = styled.div`
     display: flex;
