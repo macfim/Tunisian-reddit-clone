@@ -19,6 +19,7 @@ const Post = ({ post }) => {
     created_utc,
     num_comments,
     link_flair_richtext,
+    thumbnail
   } = post;
 
   useEffect(() => {
@@ -177,12 +178,13 @@ const Post = ({ post }) => {
           {title}
         </Title>
         {contentType === "text" && <Content>{selftext}</Content>}
-        {contentType === "image" && (
+        {contentType === "image" && ( 
           <LazyLoadImage
             alt="img"
             src={url_overridden_by_dest}
             width="100%"
             height="auto"
+            placeholderSrc={thumbnail}
           />
         )}
         {contentType === "video" && (
