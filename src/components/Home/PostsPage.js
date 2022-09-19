@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 import { getPosts } from "../../Slices/postsSlice";
+import { toggleMobileMenu } from "../../Slices/togglesSlice";
 
 import Post from "./Post";
 import Repos from "./Repos";
@@ -20,6 +21,7 @@ const PostsPage = ({ categorie }) => {
 
   useEffect(() => {
     dispatch(getPosts(categorie));
+    dispatch(toggleMobileMenu(false));
   }, [dispatch, location, categorie]);
 
   const Main = styled.div`
