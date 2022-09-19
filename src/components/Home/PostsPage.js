@@ -71,7 +71,7 @@ const PostsPage = ({ categorie }) => {
             ))}
           </PostsList>
         ) : null}
-        <LoadMoreButton />
+        {status === "success" ? <LoadMoreButton /> : null}
       </PostsContainer>
       <Info>
         <Repos />
