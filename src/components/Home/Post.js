@@ -2,14 +2,15 @@ import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 
-import { Comments } from "../icons";
+import { CommentsI } from "../icons";
 import { checkUrlContentType } from "../../utils/postRelated";
+import Comments from "./Comments";
 
 const Post = ({ post }) => {
-  const [contentType, setContentType] = useState(null);
-  const [postAge, setPostAge] = useState("");
+  const [details, setDetails] = useState({ contentType: null, postAge: null });
 
   const {
+    id,
     title,
     author,
     link_flair_background_color,
@@ -19,21 +20,27 @@ const Post = ({ post }) => {
     created_utc,
     num_comments,
     link_flair_richtext,
-    thumbnail
+    thumbnail,
+    permalink,
+    comments,
+    commentsStatus,
+    commentsError,
   } = post;
 
   useEffect(() => {
-    checkContentType();
-    calculatePostAge();
+    const contentType = checkContentType();
+    const postAge = calculatePostAge();
+
+    setDetails({ contentType, postAge });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [post]);
 
   function checkContentType() {
     try {
-      if (selftext) setContentType("text");
+      if (selftext) return "text";
       else {
         const type = checkUrlContentType(url_overridden_by_dest);
-        setContentType(type);
+        return type;
       }
     } catch (err) {
       console.log(err.message);
@@ -60,14 +67,14 @@ const Post = ({ post }) => {
       age = `${hours}h`;
     }
 
-    setPostAge(age);
+    return age;
   }
 
   const Post = styled.li`
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
     margin-bottom: 1.375rem;
-    padding-block: 1rem;
+    padding-top: 1rem;
     padding-inline: 1rem;
     overflow: hidden;
 
@@ -83,9 +90,13 @@ const Post = ({ post }) => {
     }
   `;
 
-  const AuthorName = styled.div`
+  const Author = styled.div`
     font-size: 0.75rem;
     color: grey;
+
+    & > span {
+      color: blue;
+    }
   `;
 
   const Flair = styled.div`
@@ -163,7 +174,9 @@ const Post = ({ post }) => {
   return (
     <>
       <Post>
-        <AuthorName>Posted by {author}</AuthorName>
+        <Author>
+          Posted by <span>{author}</span>
+        </Author>
         <Title>
           {link_flair_richtext.length !== 0 && (
             <Flair>
@@ -177,27 +190,34 @@ const Post = ({ post }) => {
           )}
           {title}
         </Title>
-        {contentType === "text" && <Content>{selftext}</Content>}
-        {contentType === "image" && ( 
+        {details.contentType === "text" && <Content>{selftext}</Content>}
+        {details.contentType === "image" && (
           <LazyLoadImage
             alt="img"
             src={url_overridden_by_dest}
             width="100%"
             height="auto"
             placeholderSrc={thumbnail}
-            style={{minHeight: '10rem'}}
+            style={{ minHeight: "10rem" }}
           />
         )}
-        {contentType === "video" && (
+        {details.contentType === "video" && (
           <YTVideo src={url_overridden_by_dest}></YTVideo>
         )}
         <Footer>
           <CommentWrapper>
-            <Comments></Comments>
+            <CommentsI />
             <span>{num_comments} comments</span>
           </CommentWrapper>
-          <PostAge>{`created ${postAge} ago`}</PostAge>
+          <PostAge>{`created ${details.postAge} ago`}</PostAge>
         </Footer>
+        <Comments
+          id={id}
+          permalink={permalink}
+          comments={comments}
+          commentsStatus={commentsStatus}
+          commentsError={commentsError}
+        />
       </Post>
     </>
   );

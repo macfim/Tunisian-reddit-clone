@@ -41,6 +41,11 @@ const searchMorePosts = async (searchInput, lastPost) => {
   return response.data.data.children;
 };
 
+const getPostComments = async (permalink) => {
+  const response = await axios.get(`${BASE_URL}${permalink}`);
+  return response.data;
+};
+
 const redditApi = {
   fetchPosts,
   fetchRepoPosts,
@@ -48,5 +53,6 @@ const redditApi = {
   fetchMorePosts,
   fetchMoreRepoPosts,
   searchMorePosts,
+  getPostComments,
 };
 export default redditApi;

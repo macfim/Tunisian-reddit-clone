@@ -1,4 +1,4 @@
-const Comments = () => {
+const CommentsI = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -17,4 +17,4 @@ const Comments = () => {
   );
 };
 
-export default Comments;
+export default CommentsI;

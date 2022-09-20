@@ -91,6 +91,21 @@ export const loadMoreSearchPosts = createAsyncThunk(
   }
 );
 
+export const getComments = createAsyncThunk(
+  "posts/getComments",
+  async ({ id, permalink }, { rejectWithValue }) => {
+    try {
+      const data = await redditApi.getPostComments(permalink);
+
+      const comments = data[1].data.children;
+
+      return comments;
+    } catch (err) {
+      return rejectWithValue(err.message);
+    }
+  }
+);
+
 export const loadMore = () => {
   return (dispatch, getState) => {
     const state = getState();
@@ -128,8 +143,18 @@ const postsSlice = createSlice({
     [getPosts.fulfilled]: (state, action) => {
       const [data, categorie] = action.payload;
 
+      const posts = data.map((item) => {
+        item.data = {
+          ...item.data,
+          comments: [],
+          commentsStatus: null,
+          commentsError: null,
+        };
+        return { ...item };
+      });
+
       state.status = "success";
-      state.posts = data;
+      state.posts = posts;
       state.lastPost = data[data.length - 1].data.name;
       state.lastRequested = {
         requestType: "categorie",
@@ -146,8 +171,19 @@ const postsSlice = createSlice({
       state.loadMoreStatus = "loading";
     },
     [loadMorePosts.fulfilled]: (state, action) => {
+      const data = action.payload;
+      const posts = data.map((item) => {
+        item.data = {
+          ...item.data,
+          comments: [],
+          commentsStatus: null,
+          commentsError: null,
+        };
+        return { ...item };
+      });
+
       state.loadMoreStatus = "success";
-      state.posts = [...state.posts, ...action.payload];
+      state.posts = [...state.posts, ...posts];
       state.lastPost = action.payload[action.payload.length - 1].data.name;
     },
     [loadMorePosts.rejected]: (state, action) => {
@@ -162,8 +198,18 @@ const postsSlice = createSlice({
     [getRepoPosts.fulfilled]: (state, action) => {
       const [data, repo] = action.payload;
 
+      const posts = data.map((item) => {
+        item.data = {
+          ...item.data,
+          comments: [],
+          commentsStatus: null,
+          commentsError: null,
+        };
+        return { ...item };
+      });
+
       state.status = "success";
-      state.posts = data;
+      state.posts = posts;
       state.lastPost = data[data.length - 1].data.name;
       state.lastRequested = {
         requestType: "repo",
@@ -180,8 +226,19 @@ const postsSlice = createSlice({
       state.loadMoreStatus = "loading";
     },
     [loadMoreRepoPosts.fulfilled]: (state, action) => {
+      const data = action.payload;
+      const posts = data.map((item) => {
+        item.data = {
+          ...item.data,
+          comments: [],
+          commentsStatus: null,
+          commentsError: null,
+        };
+        return { ...item };
+      });
+
       state.loadMoreStatus = "success";
-      state.posts = [...state.posts, ...action.payload];
+      state.posts = [...state.posts, ...posts];
       state.lastPost = action.payload[action.payload.length - 1].data.name;
     },
     [loadMoreRepoPosts.rejected]: (state, action) => {
@@ -196,8 +253,18 @@ const postsSlice = createSlice({
     [searchPosts.fulfilled]: (state, action) => {
       const [data, searchInput] = action.payload;
 
+      const posts = data.map((item) => {
+        item.data = {
+          ...item.data,
+          comments: [],
+          commentsStatus: null,
+          commentsError: null,
+        };
+        return { ...item };
+      });
+
       state.status = "success";
-      state.posts = data;
+      state.posts = posts;
       state.lastPost = data[data.length - 1].data.name;
       state.lastRequested = {
         requestType: "search",
@@ -214,13 +281,47 @@ const postsSlice = createSlice({
       state.loadMoreStatus = "loading";
     },
     [loadMoreSearchPosts.fulfilled]: (state, action) => {
+      const data = action.payload;
+      const posts = data.map((item) => {
+        item.data = {
+          ...item.data,
+          comments: [],
+          commentsStatus: null,
+          commentsError: null,
+        };
+        return { ...item };
+      });
+
       state.loadMoreStatus = "success";
-      state.posts = [...state.posts, ...action.payload];
+      state.posts = [...state.posts, ...posts];
       state.lastPost = action.payload[action.payload.length - 1].data.name;
     },
     [loadMoreSearchPosts.rejected]: (state, action) => {
       state.loadMoreStatus = "failed";
       state.loadMoreError = action.payload;
+    },
+
+    // getPostComments
+    [getComments.pending]: (state, action) => {
+      const id = action.meta.arg.id;
+      state.posts.find((item) => item.data.id === id).data.commentsStatus =
+        "loading";
+    },
+    [getComments.fulfilled]: (state, action) => {
+      const id = action.meta.arg.id;
+      const comments = action.payload;
+
+      state.posts.find((item) => item.data.id === id).data.comments = comments;
+      state.posts.find((item) => item.data.id === id).data.commentsStatus =
+        "success";
+    },
+    [getComments.rejected]: (state, action) => {
+      const id = action.meta.arg.id;
+
+      state.posts.find((item) => item.data.id === id).data.commentsStatus =
+        "failed";
+      state.posts.find((item) => item.data.id === id).data.commentsError =
+        action.payload;
     },
   },
 });
