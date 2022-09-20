@@ -6,7 +6,7 @@ import { useEffect } from "react";
 import { getPosts } from "../../Slices/postsSlice";
 import { toggleMobileMenu } from "../../Slices/togglesSlice";
 
-import Post from "./Post";
+import PostList from "./PostList/PostList";
 import Repos from "./Repos";
 import LoadMoreButton from "./LoadMoreButton";
 import SkeletonLoading from "./SkeletonLoading";
@@ -15,7 +15,6 @@ const PostsPage = ({ categorie }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
-  const posts = useSelector((state) => state.posts.posts);
   const status = useSelector((state) => state.posts.status);
   const error = useSelector((state) => state.posts.error);
 
@@ -49,8 +48,6 @@ const PostsPage = ({ categorie }) => {
     }
   `;
 
-  const PostsList = styled.ul``;
-
   const Error = styled.div`
     color: red;
     font-size: 1.5rem;
@@ -64,13 +61,7 @@ const PostsPage = ({ categorie }) => {
     <Main>
       <PostsContainer>
         {status === "loading" ? <SkeletonLoading /> : null}
-        {status === "success" ? (
-          <PostsList>
-            {posts.map((post, i) => (
-              <Post key={i} post={post.data} />
-            ))}
-          </PostsList>
-        ) : null}
+        {status === "success" ? <PostList /> : null}
         {status === "success" ? <LoadMoreButton /> : null}
       </PostsContainer>
       <Info>
