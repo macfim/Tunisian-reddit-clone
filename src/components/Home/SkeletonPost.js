@@ -22,6 +22,8 @@ const SkeletonPost = () => {
 
   const TextContent = styled.div`
     margin-block: 1rem;
+    with: 100%;
+    aspect-ratio: 16/9;
   `;
 
   const Footer = styled.div`
@@ -37,7 +39,7 @@ const SkeletonPost = () => {
         </SkeletonTheme>
       </Title>
       <TextContent>
-        <Skeleton width="100%" height="10rem"/>
+        <Skeleton width="100%" height="100%" />
       </TextContent>
       <Footer>
         <Skeleton width="48%" />
