@@ -35,7 +35,7 @@ const Comment = ({ comment }) => {
 
   const Author = styled.div`
     font-size: 0.7rem;
-    color: blue;
+    color: var(--secondary);
   `;
 
   const Body = styled.div`
@@ -50,6 +50,8 @@ const Comment = ({ comment }) => {
     cursor: pointer;
     padding-inline: 1rem;
     padding-block: 0.5rem;
+    color: var(--text);
+
     :hover {
       background: rgba(0, 0, 0, 0.05);
     }

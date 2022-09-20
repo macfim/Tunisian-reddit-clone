@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { SpinnerCircular } from "spinners-react";
 
-import { getComments } from "../../Slices/postsSlice";
+import { getComments } from "../../../Slices/postsSlice";
 import CommentsList from "./CommentsList";
 
 const Comments = ({
@@ -29,6 +29,7 @@ const Comments = ({
     justify-content: center;
     border-radius: 15px 15px 0 0;
     padding: 0.5rem;
+    cursor: pointer;
 
     & > svg {
       width: 1.3rem;
