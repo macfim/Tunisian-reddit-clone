@@ -5,6 +5,12 @@
   src: url('./fonts/VAG\ Rounded\ Regular.ttf') format('truetype');
 }
 
+:root {
+  --background: #FFFAEF;
+  --text: black;
+  --secondary: #1A73E8;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -14,5 +20,8 @@
 body {
   font-family: 'Montserrat', sans-serif;
   font-weight: 300;
-  background: #FFFAEF;
+  background: var(--background);
+  color: var(--text);
 }
+
+/* #FFFAEF */

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { useState, useEffect } from "react";
 
 import { CommentsI } from "../../icons";
-import Comments from "../Comments";
+import Comments from "../Comments/Comments";
 
 const Footer = ({ index }) => {
   const id = useSelector((state) => state.posts.posts[index].data.id);

@@ -19,7 +19,7 @@ const Header = ({ index }) => {
     color: grey;
 
     & > span {
-      color: blue;
+      color: var(--secondary);
     }
   `;
 
