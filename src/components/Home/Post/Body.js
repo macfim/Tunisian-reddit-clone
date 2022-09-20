@@ -13,10 +13,17 @@ const Body = ({ index }) => {
   const thumbnail = useSelector(
     (state) => state.posts.posts[index].data.thumbnail
   );
-  const isVideo = useSelector((state) => state.posts.posts[index].data.isVideo);
+  const is_video = useSelector(
+    (state) => state.posts.posts[index].data.is_video
+  );
   const post_hint = useSelector(
     (state) => state.posts.posts[index].data.post_hint
   );
+  const fallback_url = useSelector(
+    (state) => state.posts.posts[index].data?.media?.reddit_video?.fallback_url
+  );
+
+  fallback_url && console.log(fallback_url, is_video);
 
   const Content = styled.div`
     font-size: 0.9rem;
@@ -28,10 +35,8 @@ const Body = ({ index }) => {
     overflow: hidden;
   `;
 
-  const Video = styled.iframe`
+  const Video = styled.video`
     background: lightgrey;
-    aspect-ratio: 16/9;
-    border: 1px solid red;
     width: 100%;
   `;
   return (
@@ -40,7 +45,7 @@ const Body = ({ index }) => {
       {post_hint === "image" ? (
         <PostImage url={url_overridden_by_dest} thumbnail={thumbnail} />
       ) : null}
-      {isVideo ? <Video src={url_overridden_by_dest}></Video> : null}
+      {is_video ? <Video src={fallback_url} controls /> : null}
     </>
   );
 };
