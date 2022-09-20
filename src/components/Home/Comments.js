@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
+import { SpinnerCircular } from "spinners-react";
 
 import { getComments } from "../../Slices/postsSlice";
 import CommentsList from "./CommentsList";
@@ -40,10 +41,22 @@ const Comments = ({
     }
   `;
 
+  const Loading = styled.div`
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+  `;
+
   return (
     <CommentsWrapper>
-      <Button onClick={handleClick}>show comments</Button>
-      {commentsStatus === "loading" ? "Loading..." : null}
+      {commentsStatus === null ? (
+        <Button onClick={handleClick}>show comments</Button>
+      ) : null}
+      {commentsStatus === "loading" ? (
+        <Loading>
+          <SpinnerCircular size="2rem" color="black" secondaryColor="white" />
+        </Loading>
+      ) : null}
       {commentsStatus === "success" ? (
         <CommentsList comments={comments} />
       ) : null}
