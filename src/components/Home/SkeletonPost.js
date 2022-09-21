@@ -14,6 +14,11 @@ const SkeletonPost = () => {
     display: flex;
     flex-direction: column;
     justify-content: start;
+
+    @media only screen and (min-width: 468px) {
+      max-width: 40rem;
+      margin-inline: auto;
+    }
   `;
 
   const Title = styled.div`
