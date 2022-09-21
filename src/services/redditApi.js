@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "https://api.reddit.com";
-const PARAMS = "include_over_18=1&limit=10";
+const PARAMS = "limit=10";
 
 const fetchPosts = async (categorie) => {
   const response = await axios.get(`${BASE_URL}/${categorie}?${PARAMS}`);
