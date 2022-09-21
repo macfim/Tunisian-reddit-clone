@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { SpinnerCircular } from "spinners-react";
+import { useState } from "react";
 
 import { getComments } from "../../../Slices/postsSlice";
 import CommentsList from "./CommentsList";
@@ -13,6 +14,7 @@ const Comments = ({
   commentsError,
 }) => {
   const dispatch = useDispatch();
+  const [showComments, setShowComments] = useState(true);
 
   const handleClick = () => {
     dispatch(getComments({ id, permalink }));
@@ -50,15 +52,20 @@ const Comments = ({
 
   return (
     <CommentsWrapper>
-      {commentsStatus === null ? (
+      {commentsStatus === null || !showComments ? (
         <Button onClick={handleClick}>show comments</Button>
+      ) : null}
+      {commentsStatus === "success" && showComments ? (
+        <Button onClick={(o) => setShowComments((prev) => !prev)}>
+          hide comments
+        </Button>
       ) : null}
       {commentsStatus === "loading" ? (
         <Loading>
           <SpinnerCircular size="2rem" color="black" secondaryColor="white" />
         </Loading>
       ) : null}
-      {commentsStatus === "success" ? (
+      {commentsStatus === "success" && showComments ? (
         <CommentsList comments={comments} />
       ) : null}
       {commentsStatus === "failed" ? <h2>{commentsError}</h2> : null}
