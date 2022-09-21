@@ -23,8 +23,6 @@ const Body = ({ index }) => {
     (state) => state.posts.posts[index].data?.media?.reddit_video?.fallback_url
   );
 
-  fallback_url && console.log(fallback_url, is_video);
-
   const Content = styled.div`
     font-size: 0.9rem;
     font-weight: 400;
