@@ -33,10 +33,6 @@ const Comments = ({
     padding: 0.5rem;
     cursor: pointer;
 
-    & > svg {
-      width: 1.3rem;
-    }
-
     @media (hover: hover) {
       :hover {
         background: rgba(0, 0, 0, 0.05);

@@ -26,13 +26,13 @@ const Comment = ({ comment, reply = false }) => {
 
   const Comment = styled.div`
     padding-top: 1rem;
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
     font-weight: 400;
     padding-inline: 0.5rem;
-    // background: ${reply ? null : 'rgba(0,0,0,0.05)'};
-    border-top: ${reply ? null : '1px solid rgba(0,0,0,0.2)'};
-    border-bottom: ${reply ? null : '1px solid rgba(0,0,0,0.1)'};
-    margin-bottom: ${reply ? null : '.5rem'};
+    // background: ${reply ? null : "rgba(0,0,0,0.05)"};
+    border-top: ${reply ? null : "1px solid rgba(0,0,0,0.2)"};
+    border-bottom: ${reply ? null : "1px solid rgba(0,0,0,0.1)"};
+    margin-bottom: ${reply ? null : ".5rem"};
   `;
 
   const Header = styled.div``;
@@ -49,6 +49,8 @@ const Comment = ({ comment, reply = false }) => {
 
   const Button = styled.button`
     background: none;
+    width: 100%;
+    text-align: left;
     border: none;
     text-decoration: underline;
     cursor: pointer;
@@ -56,12 +58,14 @@ const Comment = ({ comment, reply = false }) => {
     padding-block: 0.5rem;
     color: var(--text);
 
-    :hover {
-      background: rgba(0, 0, 0, 0.05);
+    @media (hover: hover) {
+      :hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
     }
   `;
 
-  if (!body) return null; 
+  if (!body) return null;
 
   return (
     <Comment>
