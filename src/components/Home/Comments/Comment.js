@@ -3,7 +3,7 @@ import { useState } from "react";
 
 import CommentsList from "./CommentsList";
 
-const Comment = ({ comment }) => {
+const Comment = ({ comment, reply = false }) => {
   const { author, body, replies } = comment;
   const [repliesVisible, setRepliesVisible] = useState(false);
 
@@ -26,9 +26,13 @@ const Comment = ({ comment }) => {
 
   const Comment = styled.div`
     padding-top: 1rem;
-    padding-bottom: 0;
+    padding-bottom: .5rem;
     font-weight: 400;
-    padding-left: 0.5rem;
+    padding-inline: 0.5rem;
+    // background: ${reply ? null : 'rgba(0,0,0,0.05)'};
+    border-top: ${reply ? null : '1px solid rgba(0,0,0,0.2)'};
+    border-bottom: ${reply ? null : '1px solid rgba(0,0,0,0.1)'};
+    margin-bottom: ${reply ? null : '.5rem'};
   `;
 
   const Header = styled.div``;
@@ -57,6 +61,8 @@ const Comment = ({ comment }) => {
     }
   `;
 
+  if (!body) return null; 
+
   return (
     <Comment>
       <Header>
@@ -69,7 +75,7 @@ const Comment = ({ comment }) => {
         </Button>
       ) : null}
       {repliesVisible && isReplies ? (
-        <CommentsList comments={replies.data.children} />
+        <CommentsList reply comments={replies.data.children} />
       ) : null}
     </Comment>
   );

@@ -10,11 +10,19 @@ const Home = () => {
   const Wrapper = styled.div`
     position: relative;
     top: 11rem;
-    padding-inline: 0.875rem;
     padding-bottom: 1rem;
+
+    @media only screen and (min-width: 480px) {
+      padding-inline: 1rem;
+    }
+
+    @media only screen and (min-width: 768px) {
+      padding-inline: 4rem;
+    }
 
     @media only screen and (min-width: 1000px) {
       top: 6rem;
+      padding-inline: 1rem;
     }
   `;
 

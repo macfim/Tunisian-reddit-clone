@@ -23,6 +23,11 @@ const Post = ({ postId, index }) => {
         
       }
     }
+
+    @media only screen and (min-width: 468px) {
+      max-width: 40rem;
+      margin-inline: auto;
+    }
   `;
 
   return (

@@ -40,6 +40,7 @@ const Footer = ({ index }) => {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-bottom: 0.5rem;
   `;
 
   const CommentWrapper = styled.div`
