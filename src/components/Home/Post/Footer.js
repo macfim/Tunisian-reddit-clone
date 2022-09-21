@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 
 import { CommentsI } from "../../icons";
 import Comments from "../Comments/Comments";
+import { dateCalculator } from "../../../utils/postRelated";
 
 const Footer = ({ index }) => {
   const id = useSelector((state) => state.posts.posts[index].data.id);
@@ -29,7 +30,7 @@ const Footer = ({ index }) => {
   const [postAge, setPostAge] = useState("");
 
   useEffect(() => {
-    setPostAge(calculatePostAge(created_utc));
+    setPostAge(dateCalculator(created_utc));
   }, [created_utc]);
 
   const Footer = styled.div`
@@ -73,7 +74,7 @@ const Footer = ({ index }) => {
           <CommentsI />
           <span>{num_comments} comments</span>
         </CommentWrapper>
-        <PostAge>{`created ${postAge} ago`}</PostAge>
+        <PostAge>{`created ${postAge}`}</PostAge>
       </PostInfo>
       <Comments
         id={id}
@@ -85,28 +86,5 @@ const Footer = ({ index }) => {
     </Footer>
   );
 };
-
-function calculatePostAge(created_utc) {
-  const localUnixTimestamp = Math.floor(Date.now() / 1000);
-  const newTimestamp = localUnixTimestamp - created_utc;
-
-  const newDate = new Date(newTimestamp * 1000);
-  let hours = newDate.getHours();
-  let minutes = newDate.getMinutes();
-  let seconds = newDate.getSeconds();
-  let age = 0;
-
-  if (hours === 0) {
-    if (minutes === 0) {
-      age = `${seconds}s`;
-    } else {
-      age = `${minutes}min`;
-    }
-  } else {
-    age = `${hours}h`;
-  }
-
-  return age;
-}
 
 export default Footer;
