@@ -2,10 +2,13 @@ import styled from "@emotion/styled";
 import { useState } from "react";
 
 import CommentsList from "./CommentsList";
+import { dateCalculator } from "../../../utils/postRelated";
 
 const Comment = ({ comment, reply = false }) => {
-  const { author, body, replies } = comment;
+  const { author, body, replies, created } = comment;
   const [repliesVisible, setRepliesVisible] = useState(false);
+
+  const commentAge = dateCalculator(created);
 
   const numberOfReplies = getNumberOfReplies();
   const isReplies =
@@ -40,6 +43,15 @@ const Comment = ({ comment, reply = false }) => {
   const Author = styled.div`
     font-size: 0.7rem;
     color: var(--secondary);
+
+    & > span:nth-of-type(1) {
+      color: black;
+    }
+
+    & > span:nth-of-type(2) {
+      color: black;
+      font-size: 0.6rem;
+    }
   `;
 
   const Body = styled.div`
@@ -63,6 +75,10 @@ const Comment = ({ comment, reply = false }) => {
         background: rgba(0, 0, 0, 0.05);
       }
     }
+
+    :active {
+      background: rgba(0, 0, 0, 0.05);
+    }
   `;
 
   if (!body) return null;
@@ -70,7 +86,9 @@ const Comment = ({ comment, reply = false }) => {
   return (
     <Comment>
       <Header>
-        <Author>{author}</Author>
+        <Author>
+          {author} <span> | </span> <span>{commentAge}</span>
+        </Author>
       </Header>
       <Body>{body}</Body>
       {isReplies ? (
