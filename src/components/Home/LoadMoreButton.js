@@ -15,18 +15,23 @@ const LoadMoreButton = () => {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+
+    @media only screen and (min-width: 468px) {
+      max-width: 40rem;
+      margin-inline: auto;
+    }
   `;
 
   const Button = styled.button`
     width: 100%;
-    padding-block: .8rem;
+    padding-block: 0.8rem;
     font-size: 1rem;
     background: white;
-    border: 1px solid rgba(0,0,0,.2);
+    border: 1px solid rgba(0, 0, 0, 0.2);
     cursor: pointer;
 
     :hover {
-      box-shadow: 0 0 10px rgba(0,0,0,.2);
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     }
   `;
 
@@ -41,11 +46,9 @@ const LoadMoreButton = () => {
   return (
     <ButtonWrapper>
       <Button onClick={handleClick}>
-        {loadMoreStatus === "loading" ? 'Loading' : 'LoadMore'}
+        {loadMoreStatus === "loading" ? "Loading" : "LoadMore"}
       </Button>
-      <ErrorMessage>
-        {loadMoreError ? loadMoreError : null}
-      </ErrorMessage>
+      <ErrorMessage>{loadMoreError ? loadMoreError : null}</ErrorMessage>
     </ButtonWrapper>
   );
 };
