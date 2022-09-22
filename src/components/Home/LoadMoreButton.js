@@ -29,6 +29,7 @@ const LoadMoreButton = () => {
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
     cursor: pointer;
+    color: black;
 
     :hover {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
