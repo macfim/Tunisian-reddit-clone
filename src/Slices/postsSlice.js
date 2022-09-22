@@ -46,7 +46,7 @@ export const getRepoPosts = createAsyncThunk(
 );
 
 export const loadMoreRepoPosts = createAsyncThunk(
-  "posts/loadMorePosts",
+  "posts/loadMoreRepoPosts",
   async (repo, { rejectWithValue, getState }) => {
     try {
       const state = getState();
@@ -77,7 +77,7 @@ export const searchPosts = createAsyncThunk(
 );
 
 export const loadMoreSearchPosts = createAsyncThunk(
-  "posts/loadMorePosts",
+  "posts/loadMoreSearchPosts",
   async (searchInput, { rejectWithValue, getState }) => {
     try {
       const state = getState();
