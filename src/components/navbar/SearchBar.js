@@ -1,18 +1,16 @@
 import styled from "@emotion/styled";
 
 import { Search } from "../icons";
-import { useDispatch } from "react-redux";
-
-import { searchPosts } from "../../Slices/postsSlice";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleSearch = (e) => {
     e.preventDefault();
     const search = e.target.search.value;
 
-    search && dispatch(searchPosts(search));
+    navigate(`/search/${search}`);
 
     e.target.search.value = "";
   };

@@ -1,27 +1,30 @@
 import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 
 import { getPosts } from "../../Slices/postsSlice";
 import { toggleMobileMenu } from "../../Slices/togglesSlice";
+import { searchPosts } from "../../Slices/postsSlice";
 
 import PostList from "./PostList/PostList";
 import Repos from "./Repos";
 import LoadMoreButton from "./LoadMoreButton";
 import SkeletonLoading from "./SkeletonLoading";
 
-const PostsPage = ({ categorie }) => {
+const PostsPage = ({ type, categorie }) => {
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const status = useSelector((state) => state.posts.status);
   const error = useSelector((state) => state.posts.error);
 
+  const q = useParams().q;
+
   useEffect(() => {
-    dispatch(getPosts(categorie));
+    if (type === "index") dispatch(getPosts(categorie));
+    if (type === "search") dispatch(searchPosts(q));
     dispatch(toggleMobileMenu(false));
-  }, [dispatch, location, categorie]);
+  }, [dispatch, type, q, categorie]);
 
   const Main = styled.div`
     display: flex;

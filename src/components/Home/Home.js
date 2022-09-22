@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import PostsPage from "./PostsPage";
 
 const Home = () => {
-
   const Home = styled.div``;
 
   const Wrapper = styled.div`
@@ -30,16 +29,28 @@ const Home = () => {
     <Home>
       <Wrapper>
         <Routes>
-          <Route index element={<PostsPage />} />
-          <Route path="/hot" element={<PostsPage categorie="hot" />} />
-          <Route path="/new" element={<PostsPage categorie="new" />} />
-          <Route path="/top" element={<PostsPage categorie="top" />} />
-          <Route path="/rising" element={<PostsPage categorie="rising" />} />
-          <Route path="/index" />
-          <Route path="/travel" />
-          <Route path="/culture" />
-          <Route path="/food" />
-          <Route path="/faq" />
+          <Route index element={<PostsPage type="index" categorie="hot" />} />
+
+          <Route
+            path="/hot"
+            element={<PostsPage type="index" categorie="hot" />}
+          />
+          <Route
+            path="/top"
+            element={<PostsPage type="index" categorie="top" />}
+          />
+          <Route
+            path="/rising"
+            element={<PostsPage type="index" categorie="rising" />}
+          />
+          <Route
+            path="/new"
+            element={<PostsPage type="index" categorie="new" />}
+          />
+
+          <Route path="/search/:q" element={<PostsPage type="search" />} />
+
+          <Route path="/subreddit" element={<PostsPage type="subreddit" />} />
           <Route path="*" element={<h1>welp</h1>} />
         </Routes>
       </Wrapper>
