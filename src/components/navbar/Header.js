@@ -62,7 +62,7 @@ const Header = () => {
   const Flag = styled.img`
     height: 39px;
     width: 43px;
-    color: red; 
+    color: red;
   `;
 
   const LSearchWrapper = styled.div`
@@ -100,7 +100,7 @@ const Header = () => {
           <Link to="/">
             <Logo>lightreddit</Logo>
           </Link>
-          <Flag src="images/logo.png" alt="logoImg" />
+          <Flag src="/images/logo.png" alt="logoImg" />
         </LogoWrapper>
         <LSearchWrapper>
           <SearchBar />
