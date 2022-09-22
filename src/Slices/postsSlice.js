@@ -25,6 +25,8 @@ export const loadMorePosts = createAsyncThunk(
 
       const data = await redditApi.fetchMorePosts(categorie, lastPost);
 
+      if (data.length === 0) throw Error("no more posts found");
+
       return data;
     } catch (err) {
       return rejectWithValue(err.message);
@@ -53,6 +55,8 @@ export const loadMoreRepoPosts = createAsyncThunk(
       const lastPost = state.posts.lastPost;
 
       const data = await redditApi.fetchMoreRepoPosts(repo, lastPost);
+
+      if (data.length === 0) throw Error("no more posts found");
 
       return data;
     } catch (err) {
@@ -84,6 +88,8 @@ export const loadMoreSearchPosts = createAsyncThunk(
       const lastPost = state.posts.lastPost;
 
       const data = await redditApi.searchMorePosts(searchInput, lastPost);
+
+      if (data.length === 0) throw Error("no more posts found");
 
       return data;
     } catch (err) {
@@ -154,6 +160,7 @@ const postsSlice = createSlice({
     // getPosts
     [getPosts.pending]: (state, action) => {
       state.status = "loading";
+      state.error = null;
     },
     [getPosts.fulfilled]: (state, action) => {
       const [data, categorie] = action.payload;
@@ -185,6 +192,7 @@ const postsSlice = createSlice({
     // loadMorePosts
     [loadMorePosts.pending]: (state, action) => {
       state.loadMoreStatus = "loading";
+      state.loadMoreError = null;
     },
     [loadMorePosts.fulfilled]: (state, action) => {
       const data = action.payload;
@@ -210,6 +218,7 @@ const postsSlice = createSlice({
     // getRepo
     [getRepoPosts.pending]: (state, action) => {
       state.status = "loading";
+      state.error = null;
     },
     [getRepoPosts.fulfilled]: (state, action) => {
       const [data, repo] = action.payload;
@@ -220,6 +229,7 @@ const postsSlice = createSlice({
           comments: [],
           commentsStatus: null,
           commentsError: null,
+          commentsShowLength: 9,
         };
         return { ...item };
       });
@@ -240,6 +250,7 @@ const postsSlice = createSlice({
     // loadMoreRepoPosts
     [loadMoreRepoPosts.pending]: (state, action) => {
       state.loadMoreStatus = "loading";
+      state.loadMoreError = null;
     },
     [loadMoreRepoPosts.fulfilled]: (state, action) => {
       const data = action.payload;
@@ -265,6 +276,7 @@ const postsSlice = createSlice({
     // searchPosts
     [searchPosts.pending]: (state, action) => {
       state.status = "loading";
+      state.error = null;
     },
     [searchPosts.fulfilled]: (state, action) => {
       const [data, searchInput] = action.payload;
@@ -275,6 +287,7 @@ const postsSlice = createSlice({
           comments: [],
           commentsStatus: null,
           commentsError: null,
+          commentsShowLength: 9,
         };
         return { ...item };
       });
@@ -295,6 +308,7 @@ const postsSlice = createSlice({
     // loadMoreSearchPosts
     [loadMoreSearchPosts.pending]: (state, action) => {
       state.loadMoreStatus = "loading";
+      state.loadMoreError = null;
     },
     [loadMoreSearchPosts.fulfilled]: (state, action) => {
       const data = action.payload;
@@ -322,6 +336,7 @@ const postsSlice = createSlice({
       const id = action.meta.arg.id;
       state.posts.find((item) => item.data.id === id).data.commentsStatus =
         "loading";
+      state.posts.find((item) => item.data.id === id).data.commentsError = null;
     },
     [getComments.fulfilled]: (state, action) => {
       const id = action.meta.arg.id;
