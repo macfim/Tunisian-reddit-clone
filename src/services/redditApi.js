@@ -46,6 +46,11 @@ const getPostComments = async (permalink) => {
   return response.data;
 };
 
+const fetchTopSubreddits = async () => {
+  const response = await axios.get(`${BASE_URL}/subreddits`);
+  return response.data.data.children;
+};
+
 const redditApi = {
   fetchPosts,
   fetchRepoPosts,
@@ -54,5 +59,6 @@ const redditApi = {
   fetchMoreRepoPosts,
   searchMorePosts,
   getPostComments,
+  fetchTopSubreddits,
 };
 export default redditApi;

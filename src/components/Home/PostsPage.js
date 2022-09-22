@@ -12,6 +12,7 @@ import PostList from "./PostList/PostList";
 import Repos from "./Repos";
 import LoadMoreButton from "./LoadMoreButton";
 import SkeletonLoading from "./SkeletonLoading";
+import TopSubreddits from "./TopSubreddits";
 
 const PostsPage = ({ type, categorie }) => {
   const dispatch = useDispatch();
@@ -73,6 +74,7 @@ const PostsPage = ({ type, categorie }) => {
       </PostsContainer>
       <Info>
         <Repos />
+        <TopSubreddits />
       </Info>
     </Main>
   );

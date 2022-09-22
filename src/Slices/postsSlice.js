@@ -113,6 +113,19 @@ export const getComments = createAsyncThunk(
   }
 );
 
+export const getTopSubreddits = createAsyncThunk(
+  "posts/getTopSubreddits",
+  async (_, { rejectWithValue }) => {
+    try {
+      const data = await redditApi.fetchTopSubreddits();
+
+      return data;
+    } catch (err) {
+      rejectWithValue(err.message);
+    }
+  }
+);
+
 export const loadMore = () => {
   return (dispatch, getState) => {
     const state = getState();
@@ -130,10 +143,13 @@ export const loadMore = () => {
 
 const initialState = {
   posts: [],
+  subreddits: [],
   status: null,
   loadMoreStatus: null,
+  subredditsStatus: null,
   error: null,
   loadMoreError: null,
+  subredditsError: null,
   lastPost: null,
   lastRequested: { requestType: null, param: null },
 };
@@ -356,6 +372,20 @@ const postsSlice = createSlice({
         "failed";
       state.posts.find((item) => item.data.id === id).data.commentsError =
         action.payload;
+    },
+
+    // getTopSubreddits
+    [getTopSubreddits.pending]: (state, action) => {
+      state.subredditsStatus = "loading";
+      state.subredditsError = null;
+    },
+    [getTopSubreddits.fulfilled]: (state, action) => {
+      state.subredditsStatus = "success";
+      state.subreddits = action.payload;
+    },
+    [getTopSubreddits.rejected]: (state, action) => {
+      state.subredditsStatus = "failed";
+      state.subredditsError = action.payload;
     },
   },
 });
