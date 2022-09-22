@@ -47,7 +47,10 @@ const Body = ({ index }) => {
   return (
     <>
       {selftext ? (
-        <Content onClick={() => setDisplayFullContent(true)}>
+        <Content
+          title={displayFullContent ? null : "click to show full content"}
+          onClick={() => setDisplayFullContent(true)}
+        >
           {selftext}
         </Content>
       ) : null}
