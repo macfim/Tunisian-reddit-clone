@@ -12,6 +12,7 @@ const Comments = ({
   comments,
   commentsStatus,
   commentsError,
+  commentsShowLength,
 }) => {
   const dispatch = useDispatch();
   const [showComments, setShowComments] = useState(true);
@@ -62,7 +63,11 @@ const Comments = ({
         </Loading>
       ) : null}
       {commentsStatus === "success" && showComments ? (
-        <CommentsList comments={comments} />
+        <CommentsList
+          comments={comments}
+          commentsShowLength={commentsShowLength}
+          id={id}
+        />
       ) : null}
       {commentsStatus === "failed" ? <h2>{commentsError}</h2> : null}
     </CommentsWrapper>

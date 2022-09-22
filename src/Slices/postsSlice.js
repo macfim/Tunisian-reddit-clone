@@ -142,6 +142,13 @@ const postsSlice = createSlice({
       const newPosts = toggleCommentById(id, state.posts);
       state.posts = newPosts;
     },
+    increaseCommentsShowLength(state, action) {
+      const id = action.payload;
+
+      state.posts.find(
+        (item) => item.data.id === id
+      ).data.commentsShowLength += 9;
+    },
   },
   extraReducers: {
     // getPosts
@@ -157,6 +164,7 @@ const postsSlice = createSlice({
           comments: [],
           commentsStatus: null,
           commentsError: null,
+          commentsShowLength: 9,
         };
         return { ...item };
       });
@@ -337,5 +345,6 @@ const postsSlice = createSlice({
   },
 });
 
-export const { toggleShowReplies } = postsSlice.actions;
+export const { toggleShowReplies, increaseCommentsShowLength } =
+  postsSlice.actions;
 export default postsSlice.reducer;

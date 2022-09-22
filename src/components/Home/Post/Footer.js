@@ -26,6 +26,9 @@ const Footer = ({ index }) => {
   const created_utc = useSelector(
     (state) => state.posts.posts[index].data.created_utc
   );
+  const commentsShowLength = useSelector(
+    (state) => state.posts.posts[index].data.commentsShowLength
+  );
 
   const [postAge, setPostAge] = useState("");
 
@@ -82,6 +85,7 @@ const Footer = ({ index }) => {
         comments={comments}
         commentsStatus={commentsStatus}
         commentsError={commentsError}
+        commentsShowLength={commentsShowLength}
       />
     </Footer>
   );

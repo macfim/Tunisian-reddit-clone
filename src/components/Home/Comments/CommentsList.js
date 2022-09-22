@@ -1,17 +1,22 @@
 import styled from "@emotion/styled";
 import { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 import Comment from "./Comment";
+import { increaseCommentsShowLength } from "../../../Slices/postsSlice";
 
-const CommentsList = ({ comments, reply = false }) => {
-  const [length, setLength] = useState(8);
+const CommentsList = ({ comments, reply = false, commentsShowLength, id }) => {
+  const dispatch = useDispatch();
   const [isMoreComments, setIsMoreComments] = useState(true);
 
   useEffect(() => {
-    if (comments.length <= length) setIsMoreComments((prev) => !prev);
-  }, [length, comments.length]);
+    if (comments.length <= commentsShowLength)
+      setIsMoreComments((prev) => !prev);
+  }, [commentsShowLength, comments.length]);
 
-  const handleShowMoreComments = () => setLength((prev) => prev + 8);
+  const handleShowMoreComments = () => {
+    dispatch(increaseCommentsShowLength(id));
+  };
 
   const List = styled.ul`
     margin-left: ${reply ? "1rem" : null};
@@ -51,7 +56,7 @@ const CommentsList = ({ comments, reply = false }) => {
 
   return (
     <List>
-      {comments.slice(0, length).map((comment, i) => (
+      {comments.slice(0, commentsShowLength).map((comment, i) => (
         <Item key={i}>
           <Comment reply={reply} comment={comment.data} />
         </Item>
