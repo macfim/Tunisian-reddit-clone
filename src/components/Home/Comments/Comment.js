@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import CommentsList from "./CommentsList";
 import { dateCalculator } from "../../../utils/postRelated";
+import { toggleShowReplies } from "../../../Slices/postsSlice";
 
 const Comment = ({ comment, reply = false }) => {
-  const { author, body, replies, created } = comment;
-  const [repliesVisible, setRepliesVisible] = useState(false);
+  const dispatch = useDispatch();
+  const { id, author, body, replies, created, showReplies } = comment;
 
   const commentAge = dateCalculator(created);
 
@@ -25,7 +26,7 @@ const Comment = ({ comment, reply = false }) => {
     return r.length;
   }
 
-  const toggleRepliesVisibility = () => setRepliesVisible(!repliesVisible);
+  const toggleRepliesVisibility = () => dispatch(toggleShowReplies(id));
 
   const Comment = styled.div`
     padding-top: 1rem;
@@ -93,10 +94,10 @@ const Comment = ({ comment, reply = false }) => {
       <Body>{body}</Body>
       {isReplies ? (
         <Button onClick={toggleRepliesVisibility}>
-          {repliesVisible ? "hide" : `${numberOfReplies} more replies`}
+          {showReplies ? "hide" : `${numberOfReplies} more replies`}
         </Button>
       ) : null}
-      {repliesVisible && isReplies ? (
+      {showReplies && isReplies ? (
         <CommentsList reply comments={replies.data.children} />
       ) : null}
     </Comment>

@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+import { addShowReply, toggleCommentById } from "../utils/commentsRelated";
 import redditApi from "../services/redditApi";
 
 export const getPosts = createAsyncThunk(
@@ -134,7 +135,14 @@ const initialState = {
 const postsSlice = createSlice({
   name: "posts",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleShowReplies(state, action) {
+      const id = action.payload;
+
+      const newPosts = toggleCommentById(id, state.posts);
+      state.posts = newPosts;
+    },
+  },
   extraReducers: {
     // getPosts
     [getPosts.pending]: (state, action) => {
@@ -311,7 +319,10 @@ const postsSlice = createSlice({
       const id = action.meta.arg.id;
       const comments = action.payload;
 
-      state.posts.find((item) => item.data.id === id).data.comments = comments;
+      const newComments = addShowReply(comments);
+
+      state.posts.find((item) => item.data.id === id).data.comments =
+        newComments;
       state.posts.find((item) => item.data.id === id).data.commentsStatus =
         "success";
     },
@@ -326,4 +337,5 @@ const postsSlice = createSlice({
   },
 });
 
+export const { toggleShowReplies } = postsSlice.actions;
 export default postsSlice.reducer;
