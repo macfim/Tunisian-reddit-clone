@@ -50,8 +50,12 @@ const Home = () => {
 
           <Route path="/search/:q" element={<PostsPage type="search" />} />
 
-          <Route path="/subreddit" element={<PostsPage type="subreddit" />} />
-          <Route path="*" element={<h1>welp</h1>} />
+          <Route
+            path="/subreddit/:name"
+            element={<PostsPage type="subreddit" />}
+          />
+
+          <Route path="*" element={<h1>404</h1>} />
         </Routes>
       </Wrapper>
     </Home>

@@ -3,9 +3,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { getPosts } from "../../Slices/postsSlice";
 import { toggleMobileMenu } from "../../Slices/togglesSlice";
+import { getPosts } from "../../Slices/postsSlice";
 import { searchPosts } from "../../Slices/postsSlice";
+import { getRepoPosts } from "../../Slices/postsSlice";
 
 import PostList from "./PostList/PostList";
 import Repos from "./Repos";
@@ -18,13 +19,16 @@ const PostsPage = ({ type, categorie }) => {
   const status = useSelector((state) => state.posts.status);
   const error = useSelector((state) => state.posts.error);
 
-  const q = useParams().q;
+  const q = useParams()?.q;
+  const subredditName = useParams()?.name;
 
   useEffect(() => {
-    if (type === "index") dispatch(getPosts(categorie));
-    if (type === "search") dispatch(searchPosts(q));
+    type === "index" && dispatch(getPosts(categorie));
+    type === "search" && dispatch(searchPosts(q));
+    type === "subreddit" && dispatch(getRepoPosts(subredditName));
+
     dispatch(toggleMobileMenu(false));
-  }, [dispatch, type, q, categorie]);
+  }, [dispatch, type, q, categorie, subredditName]);
 
   const Main = styled.div`
     display: flex;

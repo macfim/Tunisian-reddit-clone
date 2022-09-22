@@ -1,23 +1,21 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import { ChevronDown, ChevronUp } from "../icons";
 
-import { getRepoPosts } from "../../Slices/postsSlice";
-
 const RepoDropDown = (props) => {
+  const navigate = useNavigate();
   const { title, content } = props;
-  const dispatch = useDispatch();
-  
+
   const [isVisible, setIsVisible] = useState(false);
 
   const toggleVisibility = () => {
     setIsVisible(!isVisible);
   };
 
-  const handleClick = (item) => {
-    dispatch(getRepoPosts(item));
+  const handleClick = (name) => {
+    navigate(`/subreddit/${name}`);
   };
 
   const DropDown = styled.div``;
@@ -70,9 +68,9 @@ const RepoDropDown = (props) => {
       </Title>
       {isVisible && (
         <Content>
-          {content.map((item, i) => (
-            <Item onClick={() => handleClick(item)} key={i}>
-              {item}
+          {content.map((name, i) => (
+            <Item onClick={() => handleClick(name)} key={i}>
+              {name}
             </Item>
           ))}
         </Content>
