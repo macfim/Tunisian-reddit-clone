@@ -70,6 +70,8 @@ const Comment = ({ comment, reply = false }) => {
     padding-inline: 1rem;
     padding-block: 0.5rem;
     color: var(--text);
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 5px;
 
     @media (hover: hover) {
       :hover {
