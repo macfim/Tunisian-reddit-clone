@@ -10,7 +10,6 @@ const Subreddit = ({ subreddit }) => {
 
     display: flex;
     align-items: center;
-    gap: 2rem;
 
     :hover {
       background: rgba(0, 0, 0, 0.03);
@@ -21,6 +20,7 @@ const Subreddit = ({ subreddit }) => {
     font-size: 1rem;
     font-weight: 400;
     text-transform: uppercase;
+    margin-left: auto;
   `;
 
   const LogoWrapper = styled.div`
