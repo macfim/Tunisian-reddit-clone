@@ -75,19 +75,8 @@ const TopSubreddits = () => {
     text-transform: uppercase;
   `;
 
-  const list = subreddits.slice(0, 4).map((subreddit, i) => (
-    <li key={i} onClick={() => getSubredditPosts(subreddit.data.display_name)}>
-      <Subreddit subreddit={subreddit.data} />
-    </li>
-  ));
-
-  const completeList = subreddits.map((subreddit, i) => (
-    <li key={i} onClick={() => getSubredditPosts(subreddit.data.display_name)}>
-      <Subreddit subreddit={subreddit.data} />
-    </li>
-  ));
-
-  if (subredditsStatus === "error") return <Error>{subredditsError}</Error>;
+  if (subredditsStatus === "error" || !subreddits)
+    return <Error>{subredditsError}</Error>;
 
   if (subredditsStatus === "loading")
     return (
@@ -115,7 +104,28 @@ const TopSubreddits = () => {
 
   return (
     <Wrapper>
-      <SubredditList>{showMore ? completeList : list}</SubredditList>
+      <SubredditList>
+        {showMore
+          ? subreddits.map((subreddit, i) => (
+              <li
+                key={i}
+                onClick={() => getSubredditPosts(subreddit.data.display_name)}
+              >
+                <Subreddit subreddit={subreddit.data} />
+              </li>
+            ))
+          : null}
+        {!showMore
+          ? subreddits.slice(0, 4).map((subreddit, i) => (
+              <li
+                key={i}
+                onClick={() => getSubredditPosts(subreddit.data.display_name)}
+              >
+                <Subreddit subreddit={subreddit.data} />
+              </li>
+            ))
+          : null}
+      </SubredditList>
       <Button onClick={handleShowMore}>
         {showMore ? "hide" : "show more"}
       </Button>
