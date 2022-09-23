@@ -34,7 +34,7 @@ const Header = ({ index }) => {
     font-size: 0.7rem;
     color: ${link_flair_text_color};
     padding-inline: 0.5rem;
-    padding-block: 0.2rem;
+    padding-block: 0.1rem;
     border: 1px solid lightgrey;
     border-radius: 15px;
     margin-right: 0.3rem;

@@ -32,7 +32,7 @@ const TopSubreddits = () => {
     border: 1px solid rgba(0, 0, 0, 0.2);
     border-bottom: none;
     width: 20rem;
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem;
 
     :hover {
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);

@@ -76,8 +76,8 @@ const PostsPage = ({ type, categorie }) => {
           {status === "success" ? <LoadMoreButton /> : null}
         </PostsContainer>
         <Info>
-          <Repos />
           <TopSubreddits />
+          <Repos />
         </Info>
       </Main>
     </>

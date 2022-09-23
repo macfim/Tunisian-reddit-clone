@@ -38,6 +38,8 @@ const SearchBar = () => {
     background: none;
 
     & > svg {
+      width: 100%;
+      height: 100%;
       position: relative;
       z-index: 9999;
     }
@@ -67,7 +69,7 @@ const SearchBar = () => {
       <SearchLogo type="submit">
         <Search />
       </SearchLogo>
-      <SearchInput name="search" placeholder="Search" />
+      <SearchInput name="search" placeholder="Search" type="search" />
     </SearchWrapper>
   );
 };
