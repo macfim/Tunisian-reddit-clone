@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { useSelector, useDispatch } from "react-redux";
+import { SpinnerCircular } from "spinners-react";
 
 import { loadMore } from "../../Slices/postsSlice";
 
@@ -24,7 +25,7 @@ const LoadMoreButton = () => {
 
   const Button = styled.button`
     width: 100%;
-    padding-block: 0.8rem;
+    padding-block: ${loadMoreStatus === "loading" ? "0.3rem" : "0.8rem"};
     font-size: 1rem;
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -47,7 +48,11 @@ const LoadMoreButton = () => {
   return (
     <ButtonWrapper>
       <Button onClick={handleClick}>
-        {loadMoreStatus === "loading" ? "Loading" : "LoadMore"}
+        {loadMoreStatus === "loading" ? (
+          <SpinnerCircular size="2rem" color="black" secondaryColor="white" />
+        ) : (
+          "LoadMore"
+        )}
       </Button>
       <ErrorMessage>{loadMoreError ? loadMoreError : null}</ErrorMessage>
     </ButtonWrapper>
