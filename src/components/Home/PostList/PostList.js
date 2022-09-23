@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 import { useSelector } from "react-redux";
-import { trackWindowScroll } from "react-lazy-load-image-component";
 
 import store from "../../../store";
 import Post from "../Post/Post";
 
-const PostList = ({ scrollPosition }) => {
+const PostList = () => {
   const posts = store.getState().posts.posts.map((item) => item.data.id);
 
   // eslint-disable-next-line
@@ -16,10 +15,10 @@ const PostList = ({ scrollPosition }) => {
   return (
     <PostsList>
       {posts.map((id, i) => (
-        <Post key={i} index={i} scrollPosition={scrollPosition} />
+        <Post key={i} index={i} />
       ))}
     </PostsList>
   );
 };
 
-export default trackWindowScroll(PostList);
+export default PostList;

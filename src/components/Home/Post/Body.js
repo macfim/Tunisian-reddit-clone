@@ -4,7 +4,7 @@ import { useState } from "react";
 
 import PostImage from "./PostImage";
 
-const Body = ({ index, scrollPosition }) => {
+const Body = ({ index }) => {
   const selftext = useSelector(
     (state) => state.posts.posts[index].data.selftext
   );
@@ -55,11 +55,7 @@ const Body = ({ index, scrollPosition }) => {
         </Content>
       ) : null}
       {post_hint === "image" ? (
-        <PostImage
-          url={url_overridden_by_dest}
-          thumbnail={thumbnail}
-          scrollPosition={scrollPosition}
-        />
+        <PostImage url={url_overridden_by_dest} thumbnail={thumbnail} />
       ) : null}
       {is_video ? <Video src={fallback_url} controls /> : null}
     </>

@@ -4,7 +4,7 @@ import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
 
-const Post = ({ index, scrollPosition }) => {
+const Post = ({ index }) => {
   const Post = styled.li`
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -33,7 +33,7 @@ const Post = ({ index, scrollPosition }) => {
     <>
       <Post>
         <Header index={index} />
-        <Body index={index} scrollPosition={scrollPosition} />
+        <Body index={index} />
         <Footer index={index} />
       </Post>
     </>
