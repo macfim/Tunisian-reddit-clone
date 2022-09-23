@@ -6,7 +6,6 @@ import "react-lazy-load-image-component/src/effects/blur.css";
 
 const PostImage = React.memo(({ url, thumbnail }) => {
   const ImageWrapper = styled.div`
-    aspect-ratio: 16/8;
     width: 100%;
     display: flex;
     justify-content: center;
