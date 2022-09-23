@@ -10,7 +10,7 @@ const Subreddit = ({ subreddit }) => {
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: 2rem;
 
     :hover {
       background: rgba(0, 0, 0, 0.03);
