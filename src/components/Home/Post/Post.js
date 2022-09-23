@@ -4,7 +4,7 @@ import Header from "./Header";
 import Body from "./Body";
 import Footer from "./Footer";
 
-const Post = ({ postId, index }) => {
+const Post = ({ index, scrollPosition }) => {
   const Post = styled.li`
     background: white;
     border: 1px solid rgba(0, 0, 0, 0.2);
@@ -20,7 +20,6 @@ const Post = ({ postId, index }) => {
     @media (hover: hover) {
       :hover {
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        
       }
     }
 
@@ -34,7 +33,7 @@ const Post = ({ postId, index }) => {
     <>
       <Post>
         <Header index={index} />
-        <Body index={index} />
+        <Body index={index} scrollPosition={scrollPosition} />
         <Footer index={index} />
       </Post>
     </>
