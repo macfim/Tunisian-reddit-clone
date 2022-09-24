@@ -10,7 +10,7 @@ Light reddit
 
 </h1>
 <p align="center">
-  The light weight version of reddit <a href="https://lightreddit.netlify.app/" target="_blank">lightreddit.netlify.app</a> built with <a href="https://www.gatsbyjs.org/" target="_blank">create-react-app</a> and hosted with <a href="https://www.netlify.com/" target="_blank">Netlify</a>
+  A light weight version of reddit <a href="https://lightreddit.netlify.app/" target="_blank">lightreddit.netlify.app</a> built with <a href="https://www.gatsbyjs.org/" target="_blank">create-react-app</a> and hosted with <a href="https://www.netlify.com/" target="_blank">Netlify</a>
 </p>
 
 <p  align="center">
