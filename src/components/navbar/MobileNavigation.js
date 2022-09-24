@@ -5,11 +5,9 @@ import MobileMenu from "./MobileMenu";
 import SearchBar from "./SearchBar";
 import Links from "./Links";
 import PostMenu from "./PostMenu";
-import WikiMenu from "./WikiMenu";
 
 const MobileNavigation = () => {
   const postState = useSelector((state) => state.toggles.post);
-  const wikiState = useSelector((state) => state.toggles.wiki);
   const menuState = useSelector((state) => state.toggles.menu);
 
   const Navigation = styled.div`
@@ -47,7 +45,6 @@ const MobileNavigation = () => {
         </MenuLinks>
       )}
       {postState && menuState && <PostMenu />}
-      {wikiState && menuState && <WikiMenu />}
     </Navigation>
   );
 };

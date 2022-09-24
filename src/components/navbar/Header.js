@@ -1,14 +1,9 @@
 import styled from "@emotion/styled";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import SearchBar from "./SearchBar";
-import WikiToggle from "./WikiToggle";
-import WikiMenu from "./WikiMenu";
 
 const Header = () => {
-  const wikiState = useSelector((state) => state.toggles.wiki);
-
   const Header = styled.div`
     background: white;
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -22,6 +17,7 @@ const Header = () => {
 
   const Wrapper = styled.div`
     display: flex;
+    justify-content: space-between;
 
     @media only screen and (min-width: 1000px) {
       max-width: 112rem;
@@ -67,7 +63,7 @@ const Header = () => {
 
   const LSearchWrapper = styled.div`
     display: none;
-    width: 30rem;
+    // max-width: 40rem;
     flex: 1 1 auto;
     margin-inline: 3rem;
 
@@ -106,9 +102,7 @@ const Header = () => {
           <SearchBar />
         </LSearchWrapper>
         <LMenu>
-          <PostLink>post</PostLink>
-          <WikiToggle />
-          {wikiState && <WikiMenu />}
+          <PostLink>Home</PostLink>
         </LMenu>
       </Wrapper>
     </Header>

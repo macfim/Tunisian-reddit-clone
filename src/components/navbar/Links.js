@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 
 import PostToggle from "./PostToggle";
-import WikiToggle from "./WikiToggle";
 
 const Links = () => {
   const Links = styled.div`
@@ -13,7 +12,6 @@ const Links = () => {
   return (
     <Links>
       <PostToggle />
-      <WikiToggle />
     </Links>
   );
 };

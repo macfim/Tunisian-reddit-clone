@@ -3,7 +3,6 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   menu: false,
   post: true,
-  wiki: false,
 };
 
 const togglesSlice = createSlice({
@@ -19,13 +18,6 @@ const togglesSlice = createSlice({
         ...state,
         post: !state.post,
         wiki: false,
-      };
-    },
-    toggleWiki(state) {
-      return {
-        ...state,
-        wiki: !state.wiki,
-        post: false,
       };
     },
   },
