@@ -7,6 +7,7 @@ import { toggleMobileMenu } from "../../Slices/togglesSlice";
 import { getPosts } from "../../Slices/postsSlice";
 import { searchPosts } from "../../Slices/postsSlice";
 import { getRepoPosts } from "../../Slices/postsSlice";
+import { getTopSubreddits } from "../../Slices/postsSlice";
 
 import PostList from "./PostList/PostList";
 import Repos from "./Repos";
@@ -31,6 +32,10 @@ const PostsPage = ({ type, categorie }) => {
 
     dispatch(toggleMobileMenu(false));
   }, [dispatch, type, q, categorie, subredditName]);
+
+  useEffect(() => {
+    dispatch(getTopSubreddits());
+  }, [dispatch]);
 
   const Main = styled.div`
     display: flex;

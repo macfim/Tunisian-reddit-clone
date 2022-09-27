@@ -74,19 +74,19 @@ const Header = () => {
 
   const LMenu = styled.div`
     display: none;
-    font-size: 30px;
+    font-size: 1.2rem;
     justify-content: space-between;
     align-items: center;
     flex: 0 0 auto;
 
+    & > img {
+      height: 2.5rem;
+      width: auto;
+    }
+
     @media only screen and (min-width: 1000px) {
       display: flex;
     }
-  `;
-
-  const PostLink = styled.div`
-    cursor: pointer;
-    margin-right: 3rem;
   `;
 
   return (
@@ -102,7 +102,7 @@ const Header = () => {
           <SearchBar />
         </LSearchWrapper>
         <LMenu>
-          <PostLink>Home</PostLink>
+          <img src="/images/logo.webp" alt="country-logo" />
         </LMenu>
       </Wrapper>
     </Header>

@@ -1,14 +1,12 @@
 import styled from "@emotion/styled";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Skeleton from "react-loading-skeleton";
 
-import { getTopSubreddits } from "../../Slices/postsSlice";
 import Subreddit from "./Subreddit";
 
 const TopSubreddits = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [showMore, setShowMore] = useState(false);
@@ -16,10 +14,6 @@ const TopSubreddits = () => {
   const subreddits = useSelector((state) => state.posts.subreddits);
   const subredditsStatus = useSelector((state) => state.posts.subredditsStatus);
   const subredditsError = useSelector((state) => state.posts.subredditsError);
-
-  useEffect(() => {
-    dispatch(getTopSubreddits());
-  }, [dispatch]);
 
   const getSubredditPosts = (name) => {
     navigate(`/subreddit/${name}`);
