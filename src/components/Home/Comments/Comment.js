@@ -33,9 +33,6 @@ const Comment = ({ comment, reply = false }) => {
     padding-bottom: 0.5rem;
     font-weight: 400;
     padding-inline: 0.5rem;
-    // background: ${reply ? null : "rgba(0,0,0,0.05)"};
-    border-top: ${reply ? null : "1px solid rgba(0,0,0,0.2)"};
-    border-bottom: ${reply ? null : "1px solid rgba(0,0,0,0.1)"};
     margin-bottom: ${reply ? null : ".5rem"};
   `;
 

@@ -10,8 +10,8 @@ const CommentsList = ({ comments, reply = false, commentsShowLength, id }) => {
   const [isMoreComments, setIsMoreComments] = useState(true);
 
   useEffect(() => {
-    if (comments.length <= commentsShowLength)
-      setIsMoreComments((prev) => !prev);
+    if (commentsShowLength > comments.length || comments.length <= 9)
+      setIsMoreComments(false);
   }, [commentsShowLength, comments.length]);
 
   const handleShowMoreComments = () => {

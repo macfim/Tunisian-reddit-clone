@@ -79,14 +79,16 @@ const Footer = ({ index }) => {
         </CommentWrapper>
         <PostAge>{`created ${postAge}`}</PostAge>
       </PostInfo>
-      <Comments
-        id={id}
-        permalink={permalink}
-        comments={comments}
-        commentsStatus={commentsStatus}
-        commentsError={commentsError}
-        commentsShowLength={commentsShowLength}
-      />
+      {num_comments > 0 ? (
+        <Comments
+          id={id}
+          permalink={permalink}
+          comments={comments}
+          commentsStatus={commentsStatus}
+          commentsError={commentsError}
+          commentsShowLength={commentsShowLength}
+        />
+      ) : null}
     </Footer>
   );
 };

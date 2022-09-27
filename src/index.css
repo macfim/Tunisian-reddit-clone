@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&display=swap");
 
 @font-face {
-  font-family: 'VAG Rounded';
-  src: url('./fonts/VAG\ Rounded\ Regular.ttf') format('truetype');
+  font-family: "VAG Rounded";
+  src: url("./fonts/VAG\ Rounded\ Regular.ttf") format("truetype");
 }
 
 :root {
-  --background: #FFFAEF;
+  --background: #fffaef;
   --text: black;
-  --secondary: #1A73E8;
+  --secondary-text: #767676;
+  --secondary: #1a73e8;
 }
 
 * {
@@ -18,8 +19,8 @@
 }
 
 body {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
   background: var(--background);
   color: var(--text);
 }

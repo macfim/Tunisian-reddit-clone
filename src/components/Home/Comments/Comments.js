@@ -24,13 +24,13 @@ const Comments = ({
   const CommentsWrapper = styled.div`
     margin-inline: -1rem;
     cursor: default;
+    border-top: 1px solid rgba(0, 0, 0, 0.05);
   `;
 
   const Button = styled.div`
     width: 100%;
     display: flex;
     justify-content: center;
-    border-radius: 15px 15px 0 0;
     padding: 0.5rem;
     cursor: pointer;
 
@@ -44,7 +44,7 @@ const Comments = ({
   const Loading = styled.div`
     display: flex;
     justify-content: center;
-    padding-bottom: 1rem;
+    padding: 0.2rem;
   `;
 
   return (

@@ -2,11 +2,9 @@ import styled from "@emotion/styled";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import React from "react";
 
-import "react-lazy-load-image-component/src/effects/blur.css";
-
 const PostImage = React.memo(({ url, thumbnail }) => {
   const ImageWrapper = styled.div`
-    width: 100%;
+    min-height: 20rem;
     display: flex;
     justify-content: center;
     cursor: pointer;
@@ -19,8 +17,6 @@ const PostImage = React.memo(({ url, thumbnail }) => {
         src={url}
         width="100%"
         placeholderSrc={thumbnail}
-        placeholder={<div>loading</div>}
-        effect="blur"
       />
     </ImageWrapper>
   );

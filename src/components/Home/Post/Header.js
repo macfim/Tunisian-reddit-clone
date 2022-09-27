@@ -16,7 +16,7 @@ const Header = ({ index }) => {
 
   const Author = styled.div`
     font-size: 0.75rem;
-    color: grey;
+    color: var(--secondary-text);
 
     & > span {
       color: var(--secondary);
