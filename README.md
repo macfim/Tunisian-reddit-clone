@@ -26,10 +26,11 @@ Light reddit
 <div align="center">
   <h2>large screen demo</h2>
 
-  ![demo](https://raw.githubusercontent.com/macfim/light-reddit/main/public/images/demo.png)
+![demo](https://raw.githubusercontent.com/macfim/light-reddit/main/public/images/demo2.png)
+![demo](https://raw.githubusercontent.com/macfim/light-reddit/main/public/images/demo1.png)
 
   <h2>mobile screen demo</h2>
 
-  ![mobile-demo](https://raw.githubusercontent.com/macfim/light-reddit/main/public/images/mobile-demo.png)
+![mobile-demo](https://raw.githubusercontent.com/macfim/light-reddit/main/public/images/mobile-demo.png)
 
 </div>
