@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useDispatch, useSelector } from "react-redux";
 
 import { ChevronDown, ChevronUp } from "../icons";
-import { togglePost } from "../../Slices/togglesSlice";
+import { togglePost } from "../../slices/togglesSlice";
 
 const PostToggle = () => {
   const dispatch = useDispatch();

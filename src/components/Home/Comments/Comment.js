@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 
 import CommentsList from "./CommentsList";
 import { dateCalculator } from "../../../utils/postRelated";
-import { toggleShowReplies } from "../../../Slices/postsSlice";
+import { toggleShowReplies } from "../../../slices/postsSlice";
 
 const Comment = ({ comment, reply = false }) => {
   const dispatch = useDispatch();

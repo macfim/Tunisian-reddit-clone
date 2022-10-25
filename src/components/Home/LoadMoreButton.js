@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useSelector, useDispatch } from "react-redux";
 import { SpinnerCircular } from "spinners-react";
 
-import { loadMore } from "../../Slices/postsSlice";
+import { loadMore } from "../../slices/postsSlice";
 
 const LoadMoreButton = () => {
   const dispatch = useDispatch();

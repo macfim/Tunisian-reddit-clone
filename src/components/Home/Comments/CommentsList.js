@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import Comment from "./Comment";
-import { increaseCommentsShowLength } from "../../../Slices/postsSlice";
+import { increaseCommentsShowLength } from "../../../slices/postsSlice";
 
 const CommentsList = ({ comments, reply = false, commentsShowLength, id }) => {
   const dispatch = useDispatch();
