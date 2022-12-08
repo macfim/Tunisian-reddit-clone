@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import togglesSlice from "./slices/togglesSlice";
-import postsSlice from "./slices/postsSlice";
+import togglesSlice from "./sl1ces/togglesSlice";
+import postsSlice from "./sl1ces/postsSlice";
 
 const store = configureStore({
   reducer: {
