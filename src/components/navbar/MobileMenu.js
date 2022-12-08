@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { useSelector, useDispatch } from "react-redux";
 
 import { MenuH, MenuX } from "../icons";
-import { toggleMobileMenu } from "../../slices/togglesSlice";
+import { toggleMobileMenu } from "../../sl1ces/togglesSlice";
 
 const MobileMenu = () => {
   const dispatch = useDispatch();

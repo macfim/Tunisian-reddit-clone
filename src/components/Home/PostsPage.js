@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 
-import { toggleMobileMenu } from "../../slices/togglesSlice";
-import { getPosts } from "../../slices/postsSlice";
-import { searchPosts } from "../../slices/postsSlice";
-import { getRepoPosts } from "../../slices/postsSlice";
-import { getTopSubreddits } from "../../slices/postsSlice";
+import { toggleMobileMenu } from "../../sl1ces/togglesSlice";
+import { getPosts } from "../../sl1ces/postsSlice";
+import { searchPosts } from "../../sl1ces/postsSlice";
+import { getRepoPosts } from "../../sl1ces/postsSlice";
+import { getTopSubreddits } from "../../sl1ces/postsSlice";
 
 import PostList from "./PostList/PostList";
 import Repos from "./Repos";

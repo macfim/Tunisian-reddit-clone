@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { SpinnerCircular } from "spinners-react";
 import { useState } from "react";
 
-import { getComments } from "../../../slices/postsSlice";
+import { getComments } from "../../../sl1ces/postsSlice";
 import CommentsList from "./CommentsList";
 
 const Comments = ({
